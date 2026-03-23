@@ -1,0 +1,314 @@
+# ARCHITEKTUR: Lernroutinen-Wissensdatenbank
+
+**Dokumentversion:** 1.0  
+**Datum:** 23. März 2026  
+
+---
+
+## 1. Systemüberblick
+
+Das Lernroutinen-System ist eine dokumentenbasierte Wissensdatenbank, die Lernprozesse in strukturierter Form erfasst, organisiert und wartbar hält.
+
+### Kernprinzipien
+- **Single Source of Truth (SSOT):** Jede Routine existiert in genau einer Datei
+- **DRY (Don't Repeat Yourself):** Wiederverwendbare Templates und Komponenten
+- **Git-First:** Vollständige Versionskontrolle und Audit-Trail
+- **Markdown-basiert:** Einfach zu lesen, einfach zu versionieren
+- **Hierarchisch:** Klare Struktur nach Zeit und Kategorie
+
+---
+
+## 2. Komponenten
+
+### 2.1 Routinen-Struktur
+
+Jede Routine folgt diesem Format:
+
+```markdown
+# [ROUTINE-ID]: [NAME]
+
+## Metadata
+- **ID:** ROUTINE-001  
+- **Kategorie:** kurzfristig/mittelfristig/langfristig
+- **Häufigkeit:** täglich/wöchentlich/monatlich/jährlich
+- **Zeitaufwand:** X Minuten/Stunden
+- **Verantwortlicher:** Person/Team
+- **Abhängigkeiten:** [Liste von anderen Routinen]
+- **Version:** 1.0
+- **Letzte Aktualisierung:** Datum
+
+## Ziel
+Prägnante Beschreibung, was diese Routine erreichen soll.
+
+## Vorbedingungen
+Was muss vorhanden sein, bevor diese Routine durchgeführt wird?
+
+## Schritte
+1. **Schritt 1:** Beschreibung
+2. **Schritt 2:** Beschreibung
+3. ...
+
+## Erfolgskriterien
+- Kriterium 1
+- Kriterium 2
+
+## Fehlerbehandlung
+Wie werden Fehler behandelt?
+
+## Ausgaben/Ergebnisse
+Was ist das Ergebnis dieser Routine?
+
+## Verknüpfungen
+- 🔗 [verknüpfte Routine 1](link)
+- 🔗 [verknüpfte Routine 2](link)
+
+## Changelog
+- v1.0 (Datum): Initiale Version
+- v1.1 (Datum): [Änderungen]
+```
+
+### 2.2 Template-System
+
+**Zweck:** Konsistenz und Wiederverwendbarkeit sicherstellen
+
+**Verwaltung:**
+- Master-Template in `templates/routine-template.md`
+- Beispiel-Implementierung in `templates/beispiel-routine.md`
+- Spezialvorlagen für unterschiedliche Routine-Typen (Code, Prozess, Analyse)
+
+### 2.3 Kategorisierung nach Zeithorizont
+
+```
+KURZFRISTIG (täglich/wöchentlich)
+  ├── Daily Routines (Morgens/Abends)
+  ├── Weekly Reviews
+  └── Incident Response
+
+MITTELFRISTIG (monatlich/quartalsweise)
+  ├── Monatliche Reviews
+  ├── Optimierungszyklen
+  └── Trainings- und Lern-Sprints
+
+LANGFRISTIG (jährlich/strategisch)
+  ├── Strategische Planung
+  ├── Architektur-Reviews
+  └── Jahresberichte
+```
+
+---
+
+## 3. Prozess-Schichten
+
+### Layer 1: Definition (Templates)
+- Standard-Format für alle Routinen
+- Konsistente Metadaten
+- Versionierung von Anfang an
+
+### Layer 2: Dokumentation (Markdown)
+- Menschlich lesbar
+- Git-versionierbar
+- Suchbar und linkbar
+
+### Layer 3: Verwaltung (Git)
+- Änderungshistorie
+- Branching für Entwicklung
+- Pull-Request-Review-Prozess
+
+### Layer 4: Governance (Prozesse)
+- Neue-Routine-Prozess
+- Review und Genehmigung
+- Redundanz-Management
+- Audit und Compliance
+
+---
+
+## 4. Redundanz-Management
+
+### Ziel
+Sicherstellen, dass keine doppelten oder überlappenden Routinen existieren.
+
+### Strategien
+
+**A. Verhinderung**
+- Template erzwingt Eindeutigkeit (ID, Name)
+- Review-Prozess prüft auf Redundanzen
+- Dependency-Matrix zeigt Beziehungen
+
+**B. Erkennung**
+- Monatliche Redundanz-Audits
+- Automated Checks (Skripts)
+- Manuelle Konsolidierungsanalyse
+
+**C. Elimination**
+- Merge-Decision-Prozess
+- Rerouting von Abhängigkeiten
+- Changelog mit Begründung
+- Deprecation-Phase für alte Routinen
+
+### Redundanz-Index
+
+```yaml
+# redundanz-matrix.yaml
+routine_001:
+  ähnlich_zuWie:
+    - routine_005 (95% Überlappung)
+    - routine_012 (40% Überlappung)
+  status: "zu prüfen"
+  empfehlung: "mit 005 zusammenführen"
+```
+
+---
+
+## 5. Erweiterungspunkte
+
+Das System ist für folgende Erweiterungen ausgelegt:
+
+### 5.1 Kurz- und Mittelfristig
+- [ ] README mit Quick-Start-Guide
+- [ ] Index/Übersichtsseite aller Routinen
+- [ ] Automatische Inhaltsverzeichnisse
+- [ ] Tag-basierte Filterung
+- [ ] Abhängigkeitsvisualisierung
+
+### 5.2 Mittelfristig
+- [ ] Automatisierte Validierung (Linting)
+- [ ] Automatisierte Redundanz-Erkennung
+- [ ] Dashboards für Ziele/KPIs
+- [ ] Automatisierte Test-Routinen
+- [ ] Integration mit Projektmanagement-Tools
+
+### 5.3 Langfristig
+- [ ] Workflow-Automation (z.B. Automatische Erinnerungen)
+- [ ] Datenbank-Migrations-Pfad
+- [ ] API-Zugang zu Routinen
+- [ ] Machine-Learning für Optimierungen
+- [ ] Intelligente Routine-Vorschläge
+
+---
+
+## 6. Sicherheit & Governance
+
+### 6.1 Zugriffskontrolle
+
+```
+Git Repository Level:
+├── main branch
+│   └── Nach Approval mergen (geschützt)
+├── develop branch
+│   └── Feature Branches + PRs
+└── feature/* branches
+    └── Frei für Entwickler
+```
+
+### 6.2 Audit Trail
+
+Alle Änderungen werden protokolliert durch:
+- Git Commit-History
+- Changelog in jeder Routine
+- PR-Review-Kommentare
+- Automatisierte Logs
+
+### 6.3 Backup & Recovery
+
+- Automatische Git-Backups
+- Regelmäßige Snapshots
+- Konflikt-Auflösungs-Verfahren
+
+---
+
+## 7. Performance & Skalierbarkeit
+
+### 7.1 Aktuelle Grenzen
+- Unbegrenzte Anzahl Routinen
+- Schnelle Suche via grep/git
+- Markdown-Parser für Navigation
+
+### 7.2 Optimierungen für Skalierung
+
+Bei 100+ Routinen:
+- Automatisierte Index-Generierung
+- Tag-basierte Kategorisierung
+- Snippet-Extraktion für Übersichten
+- Datenbankoptimiert (können später folgen)
+
+---
+
+## 8. Qualitätssicherung
+
+### Checklisten für jede Routine
+
+**Vor Veröffentlichung:**
+- [ ] Eindeutige ID zugewiesen
+- [ ] Template vollständig ausgefüllt
+- [ ] Abhängigkeiten dokumentiert
+- [ ] Kein Redundanzen mit anderen Routinen
+- [ ] Erfolgskriterien messbar
+- [ ] Spellcheck bestanden
+- [ ] Formatierung überprüft
+
+**Review-Prozess:**
+- [ ] Von mindestens 1 anderen Person reviewed
+- [ ] Feedback eingearbeitet
+- [ ] Changelog aktualisiert
+- [ ] Genehmigt
+
+---
+
+## 9. Integration mit Entwicklung
+
+### Workflow für neue Routinen
+
+```
+1. Feature Branch erstellen
+   git checkout -b routine/ROUTINE-XXX-name
+
+2. Datei erstellen
+   docs/handbuch/routinen/[kategorie]/ROUTINE-XXX.md
+
+3. Template ausfüllen
+   (Nach templates/routine-template.md)
+
+4. Lokal testen & Review
+   - Formatierung prüfen
+   - Links validieren
+   - Redundanzen prüfen
+
+5. Pull Request öffnen
+   - Beschreibung: Was wurde am System gelernt?
+   - Reviewer: Min. 1 Person
+
+6. Merge in develop
+   - Nach Approval
+   - Changelog aktualisieren
+
+7. Release in main
+   - Via Release-PR
+   - Tags für Versionen
+```
+
+---
+
+## 10. Metriken & Monitoring
+
+### Zu verfolgende Metriken
+
+- **Anzahl Routinen** (gesamt, pro Kategorie)
+- **Redundanz-Index** (% Redundanzen)
+- **Wartbarkeits-Index** (Durchschnittsgröße, Komplexität)
+- **Abdeckungs-Rate** (Geplante vs. dokumentierte Routinen)
+- **Update-Häufigkeit** (Aktualität)
+
+---
+
+## 11. Nächste Schritte
+
+1. ✅ Architektur definiert
+2. ⏳ Implementierung beginnen (Phase 1)
+3. ⏳ Automatisierte Validierung aufsetzen
+4. ⏳ Erste Routinen schreiben
+5. ⏳ Review-Prozess in Betrieb nehmen
+
+---
+
+**Version History:**
+- v1.0 (23.03.2026): Initiale Architektur dokumentiert

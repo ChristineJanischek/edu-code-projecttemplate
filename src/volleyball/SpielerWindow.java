@@ -17,7 +17,8 @@ import javax.swing.border.EmptyBorder;
  * den gesamten Kader an.</p>
  *
  * <p><strong>MVC-Rolle:</strong> View – delegiert alle Datenanfragen
- * an den {@link VolleyballspielerTeamManager} (Model).</p>
+ * an den {@link TeamManagerController} (Controller), der seinerseits
+ * das Model ({@link VolleyballspielerTeamManager}) befragt.</p>
  */
 public class SpielerWindow extends JFrame {
 
@@ -29,8 +30,8 @@ public class SpielerWindow extends JFrame {
     private JScrollPane scrollPane;
     private JTextArea taAusgabe;
 
-    /** Referenz auf den gemeinsamen Manager (Model) */
-    private final VolleyballspielerTeamManager manager;
+    /** Referenz auf den gemeinsamen Controller */
+    private final TeamManagerController controller;
 
     /** Gewählte Kategorie: 1 = Startaufstellung, 2 = Ersatzspieler, 3 = Kader */
     private final int auswahl;
@@ -40,11 +41,11 @@ public class SpielerWindow extends JFrame {
     /**
      * Erstellt das Anzeige-Fenster für die gewählte Spieler-Kategorie.
      *
-     * @param manager Der gemeinsame Team-Manager (Model)
-     * @param auswahl Kategorie: 1 = Startaufstellung, 2 = Ersatzspieler, 3 = Kader
+     * @param controller Der gemeinsame Controller
+     * @param auswahl    Kategorie: 1 = Startaufstellung, 2 = Ersatzspieler, 3 = Kader
      */
-    public SpielerWindow(VolleyballspielerTeamManager manager, int auswahl) {
-        this.manager = manager;
+    public SpielerWindow(TeamManagerController controller, int auswahl) {
+        this.controller = controller;
         this.auswahl = auswahl;
         initUI();
         anzeigeAktualisieren();
@@ -93,15 +94,15 @@ public class SpielerWindow extends JFrame {
         switch (auswahl) {
             case 1:
                 titel  = "Startaufstellung";
-                inhalt = manager.zeigeStartaufstellung();
+                inhalt = controller.getAusgabe(1);
                 break;
             case 2:
                 titel  = "Ersatzspieler";
-                inhalt = manager.zeigeErsatzspieler();
+                inhalt = controller.getAusgabe(2);
                 break;
             case 3:
                 titel  = "Kader";
-                inhalt = manager.zeigeKader();
+                inhalt = controller.getAusgabe(3);
                 break;
             default:
                 titel  = "Spieler";

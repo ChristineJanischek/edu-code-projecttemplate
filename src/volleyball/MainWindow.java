@@ -19,9 +19,13 @@ import javax.swing.border.EmptyBorder;
  * Spielerkategorie (Startaufstellung, Ersatzspieler oder Kader) und eine
  * Aktion (anzeigen, tauschen, einfügen, entfernen).</p>
  *
- * <p><strong>MVC-Rolle:</strong> View + Controller für die Haupt-Navigation.
- * Die gemeinsame {@link VolleyballspielerTeamManager}-Instanz (Model) wird
- * einmalig hier erzeugt und an alle Sub-Fenster weitergegeben.</p>
+ * <p><strong>MVC-Rolle:</strong> View – liest ausschließlich den UI-Zustand
+ * (gewählter RadioButton) und delegiert Validierung und Verarbeitung an den
+ * {@link TeamManagerController} (Controller).</p>
+ *
+ * <p>Sowohl der {@link VolleyballspielerTeamManager} (Model) als auch der
+ * {@link TeamManagerController} werden einmalig hier erzeugt und als
+ * gemeinsame Instanz an alle Sub-Windows weitergegeben.</p>
  */
 public class MainWindow extends JFrame {
 
@@ -35,10 +39,10 @@ public class MainWindow extends JFrame {
     private JRadioButton rbKader;
 
     /**
-     * Gemeinsame Manager-Instanz (Model) – wird einmalig erzeugt und
-     * an alle Sub-Fenster weitergegeben (Assoziation).
+     * Gemeinsamer Controller – wird einmalig erzeugt und an alle
+     * Sub-Windows weitergegeben. Enthält intern das Model.
      */
-    private final VolleyballspielerTeamManager manager;
+    private final TeamManagerController controller;
 
     // ---- Einstiegspunkt ----
 
@@ -61,10 +65,12 @@ public class MainWindow extends JFrame {
     // ---- Konstruktor ----
 
     /**
-     * Erstellt das Hauptfenster und initialisiert alle UI-Komponenten.
+     * Erstellt das Hauptfenster, erzeugt Model und Controller und
+     * initialisiert alle UI-Komponenten.
      */
     public MainWindow() {
-        this.manager = new VolleyballspielerTeamManager();
+        VolleyballspielerTeamManager manager = new VolleyballspielerTeamManager();
+        this.controller = new TeamManagerController(manager);
         initUI();
     }
 
@@ -142,7 +148,7 @@ public class MainWindow extends JFrame {
     private void onAnzeigenKlick() {
         int auswahl = leseAuswahl(true, true, true);
         if (auswahl > 0) {
-            new SpielerWindow(manager, auswahl).setVisible(true);
+            new SpielerWindow(controller, auswahl).setVisible(true);
         }
     }
 
@@ -153,7 +159,7 @@ public class MainWindow extends JFrame {
     private void onTauschenKlick() {
         int auswahl = leseAuswahl(true, true, false);
         if (auswahl > 0) {
-            new SpielerTauschWindow(manager, auswahl).setVisible(true);
+            new SpielerTauschWindow(controller, auswahl).setVisible(true);
         }
     }
 
@@ -164,37 +170,36 @@ public class MainWindow extends JFrame {
     private void onEinfuegenKlick() {
         int auswahl = leseAuswahl(true, true, false);
         if (auswahl > 0) {
-            new SpielerEinfuegeWindow(manager, auswahl).setVisible(true);
+            new SpielerEinfuegeWindow(controller, auswahl).setVisible(true);
         }
     }
 
     /**
-     * Liest die gewählte Radio-Button-Option und prüft, ob sie für die aktuelle
-     * Aktion erlaubt ist.
+     * Liest den UI-Zustand (gewählter RadioButton) und delegiert die
+     * Validierung der Auswahl an den Controller.
+     *
+     * <p><strong>View-Aufgabe</strong>: Rohauswahl aus UI-Komponenten lesen.<br>
+     * <strong>Controller-Aufgabe</strong>: Prüfen, ob die Auswahl für die
+     * Aktion semantisch gültig ist.</p>
      *
      * @param startErlaubt  {@code true} wenn Startaufstellung für diese Aktion erlaubt ist
      * @param ersatzErlaubt {@code true} wenn Ersatzspieler für diese Aktion erlaubt ist
      * @param kaderErlaubt  {@code true} wenn Kader für diese Aktion erlaubt ist
-     * @return Auswahl-Index (1, 2 oder 3) oder 0 bei fehlender/unzulässiger Auswahl
+     * @return Validierter Auswahl-Index (1, 2 oder 3) oder 0 bei Validierungsfehler
      */
     private int leseAuswahl(boolean startErlaubt, boolean ersatzErlaubt, boolean kaderErlaubt) {
-        boolean start  = rbStartaufstellung.isSelected();
-        boolean ersatz = rbErsatzspieler.isSelected();
-        boolean kader  = rbKader.isSelected();
+        // View-Aufgabe: Rohauswahl aus den UI-Komponenten lesen
+        int rohAuswahl = 0;
+        if (rbStartaufstellung.isSelected()) rohAuswahl = 1;
+        else if (rbErsatzspieler.isSelected()) rohAuswahl = 2;
+        else if (rbKader.isSelected())         rohAuswahl = 3;
 
-        if (!start && !ersatz && !kader) {
-            JOptionPane.showMessageDialog(this, "Bitte wählen Sie eine Option aus!");
+        // Controller-Aufgabe: Validierung delegieren
+        try {
+            return controller.validierteAuswahl(rohAuswahl, startErlaubt, ersatzErlaubt, kaderErlaubt);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
             return 0;
         }
-
-        if (start  && startErlaubt)  return 1;
-        if (ersatz && ersatzErlaubt) return 2;
-        if (kader  && kaderErlaubt)  return 3;
-
-        // Auswahl ist für diese Aktion nicht erlaubt
-        JOptionPane.showMessageDialog(this,
-            "Diese Option ist für die gewählte Aktion nicht verfügbar.\n" +
-            "Bitte wählen Sie Startaufstellung oder Ersatzspieler.");
-        return 0;
     }
 }

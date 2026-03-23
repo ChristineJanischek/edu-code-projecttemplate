@@ -19,9 +19,9 @@ import javax.swing.border.EmptyBorder;
  * Nach dem Klick auf ">>" wird der neue Spieler eingefügt und die Liste
  * aktualisiert angezeigt.</p>
  *
- * <p><strong>MVC-Rolle:</strong> View + Controller – nimmt die Eingabe
- * entgegen, validiert sie und delegiert die Verarbeitung an den
- * {@link VolleyballspielerTeamManager} (Model).</p>
+ * <p><strong>MVC-Rolle:</strong> View – liest UI-Eingaben und delegiert
+ * Validierung und Verarbeitung vollständig an den
+ * {@link TeamManagerController} (Controller).</p>
  */
 public class SpielerEinfuegeWindow extends JFrame {
 
@@ -33,8 +33,8 @@ public class SpielerEinfuegeWindow extends JFrame {
     private JTextField tfStelle;
     private JTextArea taAusgabe;
 
-    /** Referenz auf den gemeinsamen Manager (Model) */
-    private final VolleyballspielerTeamManager manager;
+    /** Referenz auf den gemeinsamen Controller */
+    private final TeamManagerController controller;
 
     /** Gewählte Kategorie: 1 = Startaufstellung, 2 = Ersatzspieler */
     private final int auswahl;
@@ -44,11 +44,11 @@ public class SpielerEinfuegeWindow extends JFrame {
     /**
      * Erstellt das Einfüge-Fenster für die gewählte Spieler-Kategorie.
      *
-     * @param manager Der gemeinsame Team-Manager (Model)
-     * @param auswahl 1 = Startaufstellung, 2 = Ersatzspieler
+     * @param controller Der gemeinsame Controller
+     * @param auswahl    1 = Startaufstellung, 2 = Ersatzspieler
      */
-    public SpielerEinfuegeWindow(VolleyballspielerTeamManager manager, int auswahl) {
-        this.manager = manager;
+    public SpielerEinfuegeWindow(TeamManagerController controller, int auswahl) {
+        this.controller = controller;
         this.auswahl = auswahl;
         initUI();
     }
@@ -119,36 +119,25 @@ public class SpielerEinfuegeWindow extends JFrame {
     /**
      * Verarbeitet den Klick auf den ">>" Einfügen-Button.
      *
-     * <p>Liest und validiert die Eingaben, delegiert das Einfügen
-     * an den Manager (Model) und aktualisiert die Ausgabe-Ansicht.</p>
+     * <p><strong>View-Aufgabe</strong>: Rohtext aus den Eingabefeldern lesen,
+     * Fehlermeldung anzeigen, Ausgabe nach Erfolg aktualisieren.<br>
+     * <strong>Controller-Aufgabe</strong>: Validierung und Weiterleitung
+     * an das Model (via {@link TeamManagerController#einfuegen}).</p>
      */
     private void onEinfuegenKlick() {
-        // Eingabe lesen
-        String neuerSpielerName = tfNeuerSpieler.getText().trim();
-        if (neuerSpielerName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Bitte geben Sie einen Spielernamen ein.");
-            return;
-        }
+        // View-Aufgabe: Rohtext aus Eingabefeldern übernehmen
+        String rohName   = tfNeuerSpieler.getText();
+        String rohStelle = tfStelle.getText();
 
-        int stelle;
+        // Controller-Aufgabe: Validierung + Einfügen delegieren
         try {
-            stelle = Integer.parseInt(tfStelle.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl für die Stelle eingeben.");
+            controller.einfuegen(auswahl, rohName, rohStelle);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
             return;
         }
 
-        int maxStelle = manager.holeSpielerliste(auswahl).size();
-        if (stelle < 0 || stelle > maxStelle) {
-            JOptionPane.showMessageDialog(this,
-                "Ungültige Stelle. Erlaubter Bereich: 0 bis " + maxStelle + ".");
-            return;
-        }
-
-        // Verarbeitung: Delegation an Manager (Model)
-        manager.einfuegen(auswahl, neuerSpielerName, stelle);
-
-        // Ausgabe aktualisieren
+        // View-Aufgabe: Ausgabe nach Erfolg aktualisieren
         anzeigeAktualisieren();
     }
 
@@ -156,17 +145,6 @@ public class SpielerEinfuegeWindow extends JFrame {
      * Aktualisiert die Spielerlisten-Anzeige nach einer Einfüge-Operation.
      */
     private void anzeigeAktualisieren() {
-        String inhalt;
-        switch (auswahl) {
-            case 1:
-                inhalt = manager.zeigeStartaufstellung();
-                break;
-            case 2:
-                inhalt = manager.zeigeErsatzspieler();
-                break;
-            default:
-                inhalt = "";
-        }
-        taAusgabe.setText(inhalt);
+        taAusgabe.setText(controller.getAusgabe(auswahl));
     }
 }

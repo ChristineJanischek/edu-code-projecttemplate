@@ -17,9 +17,9 @@ import javax.swing.border.EmptyBorder;
  * <p>Der Benutzer wählt zwei Positionen (ComboBoxen) und klickt auf "Tauschen".
  * Die Vorher- und Nachher-Ansicht werden nebeneinander dargestellt.</p>
  *
- * <p><strong>MVC-Rolle:</strong> View + Controller – nimmt die Eingabe
- * entgegen und delegiert die Verarbeitung an den
- * {@link VolleyballspielerTeamManager} (Model).</p>
+ * <p><strong>MVC-Rolle:</strong> View – liest die gewählten Positionen aus
+ * den ComboBoxen und delegiert Verarbeitung vollständig an den
+ * {@link TeamManagerController} (Controller).</p>
  */
 public class SpielerTauschWindow extends JFrame {
 
@@ -32,8 +32,8 @@ public class SpielerTauschWindow extends JFrame {
     private JTextArea taVorher;
     private JTextArea taNachher;
 
-    /** Referenz auf den gemeinsamen Manager (Model) */
-    private final VolleyballspielerTeamManager manager;
+    /** Referenz auf den gemeinsamen Controller */
+    private final TeamManagerController controller;
 
     /** Gewählte Kategorie: 1 = Startaufstellung, 2 = Ersatzspieler */
     private final int auswahl;
@@ -43,15 +43,15 @@ public class SpielerTauschWindow extends JFrame {
     /**
      * Erstellt das Tausch-Fenster für die gewählte Spieler-Kategorie.
      *
-     * @param manager Der gemeinsame Team-Manager (Model)
-     * @param auswahl 1 = Startaufstellung, 2 = Ersatzspieler
+     * @param controller Der gemeinsame Controller
+     * @param auswahl    1 = Startaufstellung, 2 = Ersatzspieler
      */
-    public SpielerTauschWindow(VolleyballspielerTeamManager manager, int auswahl) {
-        this.manager = manager;
+    public SpielerTauschWindow(TeamManagerController controller, int auswahl) {
+        this.controller = controller;
         this.auswahl = auswahl;
         initUI();
-        // Vorher-Anzeige initial befüllen
-        taVorher.setText(aktuelleListeAlsString());
+        // View-Aufgabe: Vorher-Anzeige initial befüllen (Daten via Controller)
+        taVorher.setText(controller.getAusgabe(auswahl));
     }
 
     // ---- UI-Initialisierung ----
@@ -85,7 +85,7 @@ public class SpielerTauschWindow extends JFrame {
         contentPane.add(lbNach);
 
         // Positions-ComboBoxen: dynamisch aus der aktuellen Listengröße befüllt
-        String[] positionen = erstellePositionenArray();
+        String[] positionen = controller.getPositionsNamen(auswahl);
         cbPositionenVon = new JComboBox<>(positionen);
         cbPositionenVon.setBounds(149, 120, 55, 22);
         contentPane.add(cbPositionenVon);
@@ -132,52 +132,26 @@ public class SpielerTauschWindow extends JFrame {
 
     // ---- Hilfsmethoden ----
 
-    /**
-     * Erzeugt ein String-Array mit 1-basierten Positionsbezeichnungen,
-     * entsprechend der aktuellen Größe der gewählten Spielerliste.
-     *
-     * @return positionsnummern als String-Array, z.B. ["1", "2", ..., "6"]
-     */
-    private String[] erstellePositionenArray() {
-        int groesse = manager.holeSpielerliste(auswahl).size();
-        String[] positionen = new String[groesse];
-        for (int i = 0; i < groesse; i++) {
-            positionen[i] = String.valueOf(i + 1);
-        }
-        return positionen;
-    }
-
-    /**
-     * Gibt den aktuellen Inhalt der gewählten Liste als formatierten String zurück.
-     *
-     * @return Zeilenweise Spielerliste
-     */
-    private String aktuelleListeAlsString() {
-        switch (auswahl) {
-            case 1: return manager.zeigeStartaufstellung();
-            case 2: return manager.zeigeErsatzspieler();
-            default: return "";
-        }
-    }
-
-    // ---- Controller-Methoden (Action-Handler) ----
+    // ---- Action-Handler ----
 
     /**
      * Verarbeitet den Klick auf den "Tauschen"-Button.
      *
-     * <p>Liest die gewählten Positionen (0-basiert aus ComboBox-Index),
-     * delegiert den Tausch an den Manager (Model) und aktualisiert
-     * die Nachher-Anzeige.</p>
+     * <p><strong>View-Aufgabe</strong>: Gewählte Positionen aus den ComboBoxen
+     * (0-basierter Index) lesen, Nachher-Anzeige aktualisieren.<br>
+     * <strong>Controller-Aufgabe</strong>: Tausch ausführen und Ergebnis
+     * zurückliefern (via {@link TeamManagerController#tauschen} +
+     * {@link TeamManagerController#getAusgabe}).</p>
      */
     private void onTauschenKlick() {
-        // Eingabe: ComboBox-Index entspricht dem 0-basierten Array-Index
+        // View-Aufgabe: Positionen (0-basiert) aus ComboBoxen lesen
         int von  = cbPositionenVon.getSelectedIndex();
         int nach = cbPositionenNach.getSelectedIndex();
 
-        // Verarbeitung: Delegation an Manager (Model)
-        manager.tausche(auswahl, von, nach);
+        // Controller-Aufgabe: Tausch delegieren
+        controller.tauschen(auswahl, von, nach);
 
-        // Ausgabe: Nachher-Anzeige aktualisieren
-        taNachher.setText(aktuelleListeAlsString());
+        // View-Aufgabe: Ergebnis aus Controller holen und anzeigen
+        taNachher.setText(controller.getAusgabe(auswahl));
     }
 }

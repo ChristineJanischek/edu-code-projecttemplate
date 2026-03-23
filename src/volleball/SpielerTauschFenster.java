@@ -127,7 +127,7 @@ public class SpielerTauschFenster extends JFrame {
 				System.out.println(nach);
 				
 				//Verarbeitung
-				//Ermittelt anhand der Auswahl (auswahl)die benötigte Spielerliste und gibt diese zurück
+				//Ermittelt anhand der Auswahl (auswahl)die benÃ¶tigte Spielerliste und gibt diese zurÃ¼ck
 				String[] spieler = myManager.holeSpielerliste(auswahl);
 				myManager.tausche(spieler, von, nach);
 				
@@ -225,7 +225,7 @@ public class SpielerTauschFenster extends JFrame {
 				System.out.println(nach);
 				
 				//Verarbeitung
-				//Ermittelt anhand der Auswahl (auswahl)die benötigte Spielerliste und gibt diese zurück
+				//Ermittelt anhand der Auswahl (auswahl)die benÃ¶tigte Spielerliste und gibt diese zurÃ¼ck
 				String[] spieler = myManager.holeSpielerliste(auswahl);
 				myManager.tausche(spieler, von, nach);
 				

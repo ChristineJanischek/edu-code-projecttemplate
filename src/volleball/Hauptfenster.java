@@ -166,7 +166,7 @@ public class Hauptfenster extends JFrame {
 			}
 			else if(startaufstellung == false && ersatzspieler == false && kaderspieler == false ) {
 				JOptionPane.showMessageDialog(null, 
-						"Bitte wählen Sie die geeignete Anzeigeoption aus!");
+						"Bitte wÃ¤hlen Sie die geeignete Anzeigeoption aus!");
 			}else {
 				auswahl = 2;
 			}
@@ -180,11 +180,11 @@ public class Hauptfenster extends JFrame {
 			}
 			else if(kaderspieler) {
 				JOptionPane.showMessageDialog(null, 
-						"Nur die Startaufstellung oder Ersatzspieler können getauscht werden. \n Bitte wählen Sie die geeignete Tauschoption aus!");
+						"Nur die Startaufstellung oder Ersatzspieler kÃ¶nnen getauscht werden. \n Bitte wÃ¤hlen Sie die geeignete Tauschoption aus!");
 			}
 			else if(startaufstellung == false && ersatzspieler == false && kaderspieler == false ) {
 				JOptionPane.showMessageDialog(null, 
-						"Bitte wählen Sie die geeignete Tauschoption aus!");
+						"Bitte wÃ¤hlen Sie die geeignete Tauschoption aus!");
 			}
 		}else if(this.verhalten == 3) {
 			if(startaufstellung) {
@@ -195,11 +195,11 @@ public class Hauptfenster extends JFrame {
 			}
 			else if(kaderspieler) {
 				JOptionPane.showMessageDialog(null, 
-						"Nur in die Startaufstellung oder Ersatzspielerliste können neue Spieler eingefügt werden. \n Bitte wählen Sie die geeignete Einfügeoption aus!");
+						"Nur in die Startaufstellung oder Ersatzspielerliste kÃ¶nnen neue Spieler eingefÃ¼gt werden. \n Bitte wÃ¤hlen Sie die geeignete EinfÃ¼geoption aus!");
 			}
 			else if(startaufstellung == false && ersatzspieler == false && kaderspieler == false ) {
 				JOptionPane.showMessageDialog(null, 
-						"Bitte wählen Sie die geeignete Einfügeoption aus!");
+						"Bitte wÃ¤hlen Sie die geeignete EinfÃ¼geoption aus!");
 			}
 		}
 		return auswahl;

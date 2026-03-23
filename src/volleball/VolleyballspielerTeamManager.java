@@ -31,7 +31,7 @@ public class VolleyballspielerTeamManager {
 		pSpieler[pNach] = pSpieler[pVon];
 		//Nimmt das geparkte Element im Zwischenspeicher und schreibt es an die Stelle pVon
 		pSpieler[pVon] = zwischenspeicher;
-		//Gibt das Spielerarray zurück
+		//Gibt das Spielerarray zurÃ¼ck
 		return pSpieler;
 	}
 	
@@ -48,13 +48,13 @@ public class VolleyballspielerTeamManager {
 		for(int i = anfangswert; i >= stelle ; i-- ) {
 			//liste[i] = liste[i-1] schiebt Elemente von links nach rechts
 			neueListe[i] = neueListe[i-1];
-			//Prüfung: i == stelle --> Einfügestelle erreicht?
+			//PrÃ¼fung: i == stelle --> EinfÃ¼gestelle erreicht?
 			if(i == stelle) {
 				//JA-Fall: liste[i-1] = spielername
 				neueListe[i-1] = spielername;
 			}
 		}	
-		//aktualisierte Liste zurückgeben
+		//aktualisierte Liste zurÃ¼ckgeben
 		return neueListe;
 	}
 	
@@ -70,7 +70,7 @@ public class VolleyballspielerTeamManager {
 	public String[] holeSpielerliste(int pAuswahl) {
 		//Deklaration und Initialisierung eines noch leeren lokalen Spielerarrays
 		String[] mSpieler = null;
-		//Prüft in welchem Array getauscht werden soll
+		//PrÃ¼ft in welchem Array getauscht werden soll
 		if(pAuswahl == 1) {
 			//Deklaration und Initialisierung des lokalen Spielerarrays mit der Spielerliste
 			mSpieler = spieler;
@@ -78,7 +78,7 @@ public class VolleyballspielerTeamManager {
 			//Deklaration und Initialisierung des lokalen Spielerarrays mit der Eratzspielerliste
 			mSpieler = ersatz;
 		}
-		//Gibt das Spielerarray zurück
+		//Gibt das Spielerarray zurÃ¼ck
 		
 		return mSpieler;
 	}
@@ -86,10 +86,10 @@ public class VolleyballspielerTeamManager {
 	public String zeigeStartaufstellung() {
 		String ergebnis = "";
 		for(int i=0; i < spieler.length;i++) {
-			//Für die Ausgabe auf der Konsole
+			//FÃ¼r die Ausgabe auf der Konsole
 			//System.out.println(spieler[i]);
 			//Erzeugt die Zweichenkette mit Spielern (untereinenander) 
-			//z.B. für eine Ausgabe
+			//z.B. fÃ¼r eine Ausgabe
 			ergebnis += spieler[i]+"\n";
 		}
 		
@@ -99,10 +99,10 @@ public class VolleyballspielerTeamManager {
 	public String zeigeErsatzspieler() {
 		String ergebnis = "";
 		for(int i=0; i < ersatz.length;i++) {
-			//Für die Ausgabe auf der Konsole
+			//FÃ¼r die Ausgabe auf der Konsole
 			//System.out.println(ersatz[i]);
 			//Erzeugt die Zweichenkette mit Spielern (untereinenander) 
-			//z.B. für eine Ausgabe
+			//z.B. fÃ¼r eine Ausgabe
 			ergebnis += ersatz[i]+"\n";
 		}
 		
@@ -115,7 +115,7 @@ public class VolleyballspielerTeamManager {
 		//ermittelt die anzahl der Elemente in ersatzspielerliste
 		int laenge_ersatz = ersatz.length;
 		
-		//addiert beide angaben um den Umfang für die kaderliste zu erhalten
+		//addiert beide angaben um den Umfang fÃ¼r die kaderliste zu erhalten
 		int laenge_kader = laenge_spieler + laenge_ersatz;
 		
 		String ergebnis = "";
@@ -123,22 +123,22 @@ public class VolleyballspielerTeamManager {
 		//erzeugt eine neue kaderliste mit dem ermittelten Umfang (Anzahl an Elementen)
 		String[] kader = new String[laenge_kader];
 		
-		//fügt die spieler der reihe nach in die neue kaderliste ein
+		//fÃ¼gt die spieler der reihe nach in die neue kaderliste ein
 		for(int i = 0; i < laenge_spieler; i++ ) {
 			//Spieler einfuegen
 			kader[i] = spieler[i];
 		}
 		
-		//hängt alle ersatzspieler der reihe nach hinten an die kaderliste an
+		//hÃ¤ngt alle ersatzspieler der reihe nach hinten an die kaderliste an
 		for(int i = 0; i < laenge_ersatz; i++ ) {
 			//Spieler einfuegen			
 			kader[i + laenge_spieler] = ersatz[i];
 		}
 		
 		//erzeugt einen Ausgabe-String mit allen Kadermitgliedern
-		//und gibt diesen String zurück
+		//und gibt diesen String zurÃ¼ck
 		for(int i=0; i < kader.length;i++) {
-			//Für die Ausgabe auf der Konsole
+			//FÃ¼r die Ausgabe auf der Konsole
 			System.out.println(kader[i]);
 			ergebnis += kader[i]+"\n";
 		}

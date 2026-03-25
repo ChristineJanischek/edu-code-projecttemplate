@@ -58,6 +58,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 - **[prozesse/redundanz-management.md](prozesse/redundanz-management.md)** - Redundanzen eliminieren
 - **[prozesse/review-prozess.md](prozesse/review-prozess.md)** - Review & Genehmigung
 - **[prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)** - Bestehende Routine ändern
+- **[prozesse/qualitaets-gates-automatisierung.md](prozesse/qualitaets-gates-automatisierung.md)** - Automatische Pflicht-Gates
 
 ### 📐 Templates & Beispiele
 - **[templates/ROUTINE-TEMPLATE.md](templates/ROUTINE-TEMPLATE.md)** - Standard-Vorlage für alle Routinen
@@ -91,7 +92,8 @@ docs/handbuch/
 │   ├── neue-routine-erstellen.md
 │   ├── routine-aktualisieren.md
 │   ├── redundanz-management.md
-│   └── review-prozess.md
+│   ├── review-prozess.md
+│   └── qualitaets-gates-automatisierung.md
 │
 └── marschplaene/             ← Planung & Tracking
     └── HAUPTMARSCHPLAN.md    ← Milestones & Todos

@@ -4,6 +4,7 @@ $mysqlPort = getenv('MYSQL_PORT') ?: '3306';
 $mysqlDb = getenv('MYSQL_DATABASE') ?: 'appdb';
 $mysqlUser = getenv('MYSQL_USER') ?: 'appuser';
 $mysqlPass = getenv('MYSQL_PASSWORD') ?: 'apppassword';
+$pythonApiUrl = getenv('PYTHON_API_URL') ?: 'http://localhost:8000';
 
 $mysqlMessage = 'Nicht getestet';
 
@@ -46,6 +47,9 @@ try {
       </section>
     </main>
 
+    <script>
+      window.PYTHON_API_URL = <?php echo json_encode($pythonApiUrl, JSON_UNESCAPED_SLASHES); ?>;
+    </script>
     <script src="app.js"></script>
   </body>
 </html>

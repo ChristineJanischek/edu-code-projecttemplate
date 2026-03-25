@@ -20,8 +20,11 @@ def mysql_status():
     host = os.getenv("MYSQL_HOST", "mysql")
     port = int(os.getenv("MYSQL_PORT", "3306"))
     user = os.getenv("MYSQL_USER", "appuser")
-    password = os.getenv("MYSQL_PASSWORD", "apppassword")
+    password = os.getenv("MYSQL_PASSWORD", "")
     database = os.getenv("MYSQL_DATABASE", "appdb")
+
+    if not password:
+        return {"ok": False, "error": "MYSQL_PASSWORD not configured"}
 
     conn = None
     try:
@@ -37,8 +40,8 @@ def mysql_status():
             cur.execute("SELECT COUNT(*) FROM demo_items")
             count = cur.fetchone()[0]
         return {"ok": True, "demo_items": count}
-    except Exception as exc:
-        return {"ok": False, "error": str(exc)}
+    except Exception:
+        return {"ok": False, "error": "Database connection failed"}
     finally:
         if conn is not None:
             conn.close()

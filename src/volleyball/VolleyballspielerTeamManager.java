@@ -22,10 +22,10 @@ import java.util.ArrayList;
 public class VolleyballspielerTeamManager {
 
     /** Liste der Kaderspieler (aktive Startaufstellung) */
-    private ArrayList<Kaderspieler> startaufstellung;
+    private final ArrayList<Kaderspieler> startaufstellung;
 
     /** Liste der Ersatzspieler (Ersatzbank) */
-    private ArrayList<Ersatzspieler> ersatzBank;
+    private final ArrayList<Ersatzspieler> ersatzBank;
 
     // ---- Konstruktor ----
 
@@ -50,7 +50,7 @@ public class VolleyballspielerTeamManager {
         ersatzBank.add(new Ersatzspieler("Nico"));
     }
 
-    // ---- Getter / Setter ----
+    // ---- Lesender Zugriff ----
 
     /**
      * Gibt die Startaufstellung zurück.
@@ -58,16 +58,7 @@ public class VolleyballspielerTeamManager {
      * @return ArrayList der Kaderspieler
      */
     public ArrayList<Kaderspieler> getStartaufstellung() {
-        return startaufstellung;
-    }
-
-    /**
-     * Setzt die Startaufstellung.
-     *
-     * @param startaufstellung Neue Startaufstellung
-     */
-    public void setStartaufstellung(ArrayList<Kaderspieler> startaufstellung) {
-        this.startaufstellung = startaufstellung;
+        return new ArrayList<>(startaufstellung);
     }
 
     /**
@@ -76,16 +67,7 @@ public class VolleyballspielerTeamManager {
      * @return ArrayList der Ersatzspieler
      */
     public ArrayList<Ersatzspieler> getErsatzBank() {
-        return ersatzBank;
-    }
-
-    /**
-     * Setzt die Ersatzbank.
-     *
-     * @param ersatzBank Neue Ersatzbank
-     */
-    public void setErsatzBank(ArrayList<Ersatzspieler> ersatzBank) {
-        this.ersatzBank = ersatzBank;
+        return new ArrayList<>(ersatzBank);
     }
 
     /**
@@ -98,7 +80,7 @@ public class VolleyballspielerTeamManager {
         switch (auswahl) {
             case 1: return startaufstellung;
             case 2: return ersatzBank;
-            default: return null;
+            default: return new ArrayList<>();
         }
     }
 

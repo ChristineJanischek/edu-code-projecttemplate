@@ -6,6 +6,11 @@ if [[ ! -f .env ]]; then
   echo "[start] .env aus .env.example erzeugt"
 fi
 
+if grep -q "CHANGE_ME" .env; then
+  echo "[start] Fehler: .env enthaelt noch CHANGE_ME-Werte. Bitte zuerst Zugangsdaten setzen."
+  exit 1
+fi
+
 docker compose up -d --build
 
 echo "[start] Dienste gestartet"

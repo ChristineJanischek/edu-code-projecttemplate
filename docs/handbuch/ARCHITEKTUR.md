@@ -1,7 +1,7 @@
 # ARCHITEKTUR: Lernroutinen-Wissensdatenbank
 
-**Dokumentversion:** 1.0  
-**Datum:** 23. März 2026  
+**Dokumentversion:** 1.1  
+**Datum:** 25. März 2026  
 
 ---
 
@@ -118,6 +118,7 @@ LANGFRISTIG (jährlich/strategisch)
 - Neue-Routine-Prozess
 - Review und Genehmigung
 - Redundanz-Management
+- Qualitaets-Gates-Automatisierung
 - Audit und Compliance
 
 ---
@@ -164,14 +165,14 @@ routine_001:
 Das System ist für folgende Erweiterungen ausgelegt:
 
 ### 5.1 Kurz- und Mittelfristig
-- [ ] README mit Quick-Start-Guide
-- [ ] Index/Übersichtsseite aller Routinen
+- [x] README mit Quick-Start-Guide
+- [x] Index/Übersichtsseite aller Routinen
 - [ ] Automatische Inhaltsverzeichnisse
 - [ ] Tag-basierte Filterung
 - [ ] Abhängigkeitsvisualisierung
 
 ### 5.2 Mittelfristig
-- [ ] Automatisierte Validierung (Linting)
+- [x] Automatisierte Validierung (Linting)
 - [ ] Automatisierte Redundanz-Erkennung
 - [ ] Dashboards für Ziele/KPIs
 - [ ] Automatisierte Test-Routinen
@@ -272,6 +273,9 @@ Bei 100+ Routinen:
    - Formatierung prüfen
    - Links validieren
    - Redundanzen prüfen
+   - `bash scripts/validate-security.sh`
+   - `bash scripts/validate-architecture.sh`
+   - `bash scripts/validate-docs.sh`
 
 5. Pull Request öffnen
    - Beschreibung: Was wurde am System gelernt?
@@ -303,12 +307,14 @@ Bei 100+ Routinen:
 ## 11. Nächste Schritte
 
 1. ✅ Architektur definiert
-2. ⏳ Implementierung beginnen (Phase 1)
-3. ⏳ Automatisierte Validierung aufsetzen
-4. ⏳ Erste Routinen schreiben
-5. ⏳ Review-Prozess in Betrieb nehmen
+2. ✅ Implementierung gestartet (Phase 1)
+3. ✅ Automatisierte Validierung aufgesetzt
+4. ✅ Erste operative Routine fuer Qualitaets-Gates erstellt
+5. ✅ Review-Prozess in Betrieb
+6. ⏳ Automatisierte Redundanz-Erkennung ausbauen
 
 ---
 
 **Version History:**
 - v1.0 (23.03.2026): Initiale Architektur dokumentiert
+- v1.1 (25.03.2026): Qualitaets-Gates als Pflichtprozess und Validierungsschritte integriert

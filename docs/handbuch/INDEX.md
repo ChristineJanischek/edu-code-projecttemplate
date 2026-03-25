@@ -19,6 +19,7 @@
 - **[prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)** - Update & Wartung
 - **[prozesse/redundanz-management.md](prozesse/redundanz-management.md)** - Redundanzen finden & beheben
 - **[prozesse/review-prozess.md](prozesse/review-prozess.md)** - Quality Assurance
+- **[prozesse/qualitaets-gates-automatisierung.md](prozesse/qualitaets-gates-automatisierung.md)** - Automatische Pflicht-Gates
 
 ### 📐 Templates & Beispiele
 - **[templates/ROUTINE-TEMPLATE.md](templates/ROUTINE-TEMPLATE.md)** - Standard-Vorlage (MUSS gedacht werden!)
@@ -94,7 +95,8 @@ handbuch/
 │   ├── neue-routine-erstellen.md
 │   ├── routine-aktualisieren.md
 │   ├── redundanz-management.md
-│   └── review-prozess.md
+│   ├── review-prozess.md
+│   └── qualitaets-gates-automatisierung.md
 │
 └── marschplaene/                  ← Planung & Tracking
     ├── HAUPTMARSCHPLAN.md         ← Master-Marschplan

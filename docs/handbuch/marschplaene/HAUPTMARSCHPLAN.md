@@ -1,8 +1,8 @@
 # MARSCHPLAN: Lernroutinen-Wissensdatenbank
 
-**Dokumentversion:** 1.0  
-**Datum:** 23. März 2026  
-**Status:** Live Marschplan  
+**Dokumentversion:** 1.1  
+**Datum:** 25. März 2026  
+**Status:** Planmodus aktiv  
 
 ---
 
@@ -21,12 +21,12 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 
 ## 📅 Phasen und Milestones
 
-### Phase 1: GRUNDSTRUKTUR (Woche 1-2) ✅🔄
+### Phase 1: GRUNDSTRUKTUR (Woche 1-2) ✅
 
-**Milestone 1.1:** Infrastruktur aufbauen (STATUS: IN BEARBEITUNG)
+**Milestone 1.1:** Infrastruktur aufbauen (STATUS: ABGESCHLOSSEN)
 
 ```
-[████████░░] 80% abgeschlossen
+[██████████] 100% abgeschlossen
 ```
 
 |  # | Todo | Status | Fällig | Aufwand |
@@ -34,25 +34,25 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 1.1.1 | ✅ Verzeichnisstruktur erstellen | DONE | 23.03 | 30 Min |
 | 1.1.2 | ✅ PFLICHTENHEFT.md schreiben | DONE | 23.03 | 1h |
 | 1.1.3 | ✅ ARCHITEKTUR.md schreiben | DONE | 23.03 | 1h |
-| 1.1.4 | ✅ MARSCHPLAN.md erstellen | IN PROGRESS | 23.03 | 1h |
-| 1.1.5 | ⏳ README.md mit Quick-Start | TODO | 24.03 | 45 Min |
-| 1.1.6 | ⏳ Verzeichnis-Index generieren | TODO | 24.03 | 30 Min |
+| 1.1.4 | ✅ MARSCHPLAN.md erstellen | DONE | 23.03 | 1h |
+| 1.1.5 | ✅ README.md mit Quick-Start | DONE | 24.03 | 45 Min |
+| 1.1.6 | ✅ Verzeichnis-Index generieren | DONE | 24.03 | 30 Min |
 
 **Ziel-Datum:** 24.03.2026  
-**Aktueller Status:** 75% fertig
+**Aktueller Status:** 100% fertig
 
 ---
 
 **Milestone 1.2:** Templates & Standards definieren
 
 ```
-[██░░░░░░░] 20% abgeschlossen
+[████░░░░░░] 40% abgeschlossen
 ```
 
 | # | Todo | Status | Fällig | Aufwand |
 |----|----|-|----|-----|
-| 1.2.1 | ⏳ routine-template.md erstellen | TODO | 24.03 | 1h |
-| 1.2.2 | ⏳ beispiel-routine.md schreiben | TODO | 25.03 | 1h |
+| 1.2.1 | ✅ routine-template.md erstellen | DONE | 24.03 | 1h |
+| 1.2.2 | ✅ beispiel-routine.md schreiben | DONE | 25.03 | 1h |
 | 1.2.3 | ⏳ Metadaten-Standard definieren | TODO | 25.03 | 30 Min |
 | 1.2.4 | ⏳ Naming-Konventionen festlegen | TODO | 25.03 | 30 Min |
 | 1.2.5 | ⏳ Validierungs-Checkliste erstellen | TODO | 26.03 | 45 Min |
@@ -65,15 +65,15 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 **Milestone 1.3:** Prozess-Dokumentation
 
 ```
-[░░░░░░░░░░] 0% abgeschlossen
+[████████░░] 80% abgeschlossen
 ```
 
 | # | Todo | Status | Fällig | Aufwand |
 |----|----|-|----|-----|
-| 1.3.1 | ⏳ neue-routine-erstellen.md | TODO | 27.03 | 1h |
-| 1.3.2 | ⏳ routine-aktualisieren.md | TODO | 27.03 | 45 Min |
-| 1.3.3 | ⏳ redundanz-management.md | TODO | 28.03 | 1h |
-| 1.3.4 | ⏳ review-prozess.md | TODO | 28.03 | 45 Min |
+| 1.3.1 | ✅ neue-routine-erstellen.md | DONE | 27.03 | 1h |
+| 1.3.2 | ✅ routine-aktualisieren.md | DONE | 27.03 | 45 Min |
+| 1.3.3 | ✅ redundanz-management.md | DONE | 28.03 | 1h |
+| 1.3.4 | ✅ review-prozess.md | DONE | 28.03 | 45 Min |
 | 1.3.5 | ⏳ governance-richtlinien.md | TODO | 29.03 | 1h |
 
 **Ziel-Datum:** 29.03.2026  
@@ -278,22 +278,22 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 
 ---
 
-## 🎬 Nächste sofortige Aktionen
+## 🎬 Planmodus: Nächste 72 Stunden
 
-### Bis 24.03.2026
-- [ ] Milestone 1.1 abschließen (README, Index)
-- [ ] Alle Phase-1-Todos in Issues konvertieren
-- [ ] GitHub Project-Board aufsetzen
+### Heute (Tag 1)
+- [ ] 3 erste kurzfristige Routinen definieren (Titel + Ziel + Trigger)
+- [ ] Reihenfolge für Umsetzung festlegen (2.1.1 bis 2.1.3)
+- [ ] Offene Governance-Lücke dokumentieren (1.3.5)
 
-### Bis 26.03.2026
-- [ ] Milestone 1.2 abschließen (Templates)
-- [ ] Ersten Review-Run durchführen
-- [ ] Feedback einarbeiten
+### Tag 2
+- [ ] KF-ROUTINE-001 vollständig dokumentieren
+- [ ] KF-ROUTINE-002 vollständig dokumentieren
+- [ ] Selbst-Review nach review-prozess durchführen
 
-### Bis 29.03.2026
-- [ ] Milestone 1.3 abschließen (Prozesse)
-- [ ] Phase 1 Release vorbereiten
-- [ ] Phase 2 Planungsmeeting
+### Tag 3
+- [ ] KF-ROUTINE-003 vollständig dokumentieren
+- [ ] Querverlinkung und Abhängigkeiten ergänzen
+- [ ] Phase-2-Status im Marschplan aktualisieren
 
 ---
 
@@ -332,3 +332,4 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 
 **Version History:**
 - v1.0 (23.03.2026): Initiales Marschplan erstellt, Phase 1 gestartet
+- v1.1 (25.03.2026): Planmodus aktiviert, Status an Ist-Zustand angepasst, 72h-Aktionsplan ergänzt

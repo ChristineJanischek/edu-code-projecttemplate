@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, #f0f7ff 0%, #dff0e8 100%);
+  color: #1b2838;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d3dfeb;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 6px 20px rgba(15, 40, 70, 0.08);
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: #1366d6;
+  color: white;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+pre {
+  margin-top: 1rem;
+  background: #0f1f33;
+  color: #ecf3ff;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow: auto;
+}

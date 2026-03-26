@@ -13,6 +13,10 @@ fi
 
 docker compose up -d --build
 
+echo "[start] Warte auf MySQL-Init und python-api..."
+sleep 5
+docker compose restart python-api >/dev/null 2>&1 || true
+
 echo "[start] Dienste gestartet"
 echo "[start] PHP-Webapp:   http://localhost:${PHP_WEB_PORT:-8080}"
 echo "[start] Python-API:   http://localhost:${PYTHON_API_PORT:-8000}/health"

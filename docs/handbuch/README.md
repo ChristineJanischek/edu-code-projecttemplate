@@ -48,6 +48,9 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 
 ## 📖 Dokumentation
 
+### 🧪 Live-Tests & Anleitungen
+- **[anleitungen/java-live-test.md](anleitungen/java-live-test.md)** - Java-App testen: Headless-Test im Codespace & GUI lokal starten
+
 ### 🔧 Grundlagen & Setup
 - **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Alles über das System & Anforderungen
 - **[ARCHITEKTUR.md](ARCHITEKTUR.md)** - Wie das System funktioniert

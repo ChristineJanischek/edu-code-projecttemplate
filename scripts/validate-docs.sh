@@ -17,6 +17,7 @@ required_files=(
   "docs/handbuch/marschplaene/HAUPTMARSCHPLAN.md"
   "docs/handbuch/prozesse/review-prozess.md"
   "docs/handbuch/prozesse/qualitaets-gates-automatisierung.md"
+  "docs/handbuch/anleitungen/java-live-test.md"
 )
 
 for file in "${required_files[@]}"; do

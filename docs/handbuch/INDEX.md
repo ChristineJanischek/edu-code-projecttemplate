@@ -14,6 +14,9 @@
 2. **[ARCHITEKTUR.md](ARCHITEKTUR.md)** - System-Design, Komponenten, Datenfluss
 3. **[MARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)** - Phasen, Milestones, Zeitplan
 
+### 🧪 Anleitungen & Live-Tests
+- **[anleitungen/java-live-test.md](anleitungen/java-live-test.md)** - Java-App kompilieren, Modell-Tests & GUI starten
+
 ### 🔧 Prozesse & Governance
 - **[prozesse/neue-routine-erstellen.md](prozesse/neue-routine-erstellen.md)** - Schritt-für-Schritt Anleitung
 - **[prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)** - Update & Wartung

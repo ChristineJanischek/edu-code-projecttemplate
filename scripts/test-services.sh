@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# .env laden falls vorhanden, damit alle Variablen gesetzt sind
+if [[ -f .env ]]; then
+  set -a
+  # shellcheck source=.env
+  source .env
+  set +a
+fi
+
 python_port="${PYTHON_API_PORT:-8000}"
 php_port="${PHP_WEB_PORT:-8080}"
 

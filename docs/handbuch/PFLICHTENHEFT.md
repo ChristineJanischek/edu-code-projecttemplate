@@ -1,239 +1,141 @@
-# PFLICHTENHEFT: Lernroutinen-Wissensdatenbank
+# PFLICHTENHEFT: Systemanforderung (konsolidiert)
 
-**Dokumentversion:** 1.0  
-**Datum:** 23. März 2026  
-**Status:** In Bearbeitung  
-**Letzter Autor:** System-Setup  
-
----
-
-## 1. Zielstellung & Motivation
-
-### 1.1 Allgemeines Ziel
-Aufbau einer strukturierten, wiederverwendbaren Wissensdatenbank zur **Verwaltung und Dokumentation von Lernroutinen** mit verschiedenen Zeithorizonten (kurz-, mittel-, langfristig). Das System soll dem kontinuierlichen Lernen von Systemen dienen und Best Practices standardisieren.
-
-### 1.2 Spezifische Ziele
-- **Effizienz:** Routinen ohne Redundanzen gestalten
-- **Wiederverwendbarkeit:** Templates und Vorlagen für neue Routinen erstellen
-- **Erweiterbarkeit:** Einfaches Hinzufügen neuer Routinen und Kategorien
-- **Wartbarkeit:** Klare Struktur, Versionierung, Changelog
-- **Sicherheit:** Kontrolle von Zugriff und Änderungen
-- **Nachvollziehbarkeit:** Vollständige Dokumentation aller Schritte und Entscheidungen
+Dokumentversion: 2.0  
+Datum: 16.04.2026  
+Status: Verbindlich  
+Geltung: Gesamtes Repository
 
 ---
 
-## 2. Anforderungen
+## 1. Zweck und Geltungsbereich
 
-### 2.1 Funktionale Anforderungen (FA)
+Dieses Dokument ist die zentrale und verbindliche Systemanforderung fuer das Projekt.
+Es konsolidiert Systemanforderungen aus Produktsicht und Repository/Governance-Anforderungen in einer redundanzarmen SSOT-Quelle.
 
-#### FA1: Routine-Management
-- **FA1.1:** Kurzfristige Routinen (täglich/wöchentlich) verwaltbar machen
-- **FA1.2:** Mittelfristige Routinen (monatlich/quartalsweise) dokumentieren
-- **FA1.3:** Langfristige Routinen (jährlich/strategisch) festhalten
-- **FA1.4:** Hierarchische Struktur für Kategorisierung (Projekt → Prozess → Routine)
+In Scope:
+- Webanwendung, API, Java-Domaenenlogik, Datenhaltung, Dokumentationssystem
+- Entwicklungsprozess im Repository inklusive Quality Gates
 
-#### FA2: Template-System
-- **FA2.1:** Standardisiertes Template für alle Routinen-Typen
-- **FA2.2:** Metadaten: ID, Titel, Beschreibung, Kategorie, Zeitraum, Verantwortlicher
-- **FA2.3:** Struktur: Ziel, Schritte, Erfolgskriterien, Häufigkeit, Abhängigkeiten
-- **FA2.4:** Versioning mit Changelog für alle Routinen
-
-#### FA3: Prozess-Dokumentation
-- **FA3.1:** Wie man neue Routinen erstellt (Leitfaden)
-- **FA3.2:** Wie man Routinen aktualisiert und pflegt
-- **FA3.3:** Wie man Redundanzen identifiziert und eliminiert
-- **FA3.4:** Review- und Genehmigungsprozesse
-
-#### FA4: Marschpläne
-- **FA4.1:** Milestones definieren und verfolgen
-- **FA4.2:** Todo-Listen mit Prioritäten und Zuständigkeiten
-- **FA4.3:** Zeitpläne und Meilenstein-Termine
-- **FA4.4:** Machbarkeitsanalysen für neue Routinen
-
-#### FA5: Verwaltung und Governance
-- **FA5.1:** Zugriffskontrolle (wer darf lesen/schreiben/genehmigen)
-- **FA5.2:** Änderungshistorie und Audit-Log
-- **FA5.3:** Redundanz-Analyse und Konsolidierungsprozesse
-- **FA5.4:** Performance-Metriken für Routinen
-
-### 2.2 Nicht-funktionale Anforderungen (NFA)
-
-#### NFA1: Qualität
-- **NFA1.1:** Keine Redundanzen zwischen Routinen
-- **NFA1.2:** DRY-Prinzip (Don't Repeat Yourself) konsequent anwenden
-- **NFA1.3:** Maximale Wartbarkeit durch Modularität
-- **NFA1.4:** Klare, verständliche Schreibweise
-
-#### NFA2: Sicherheit
-- **NFA2.1:** Versionskontrolle über Git
-- **NFA2.2:** Automatische Backups und Recovery-Möglichkeiten
-- **NFA2.3:** Schutz vor Datenverlust
-- **NFA2.4:** Transparenz in allen Änderungen (Changelog)
-
-#### NFA3: Performance & Skalierbarkeit
-- **NFA3.1:** System skalierbar auf 100+ Routinen
-- **NFA3.2:** Schnelle Suche und Navigation
-- **NFA3.3:** Automatisierte Validierung und Prüfung
-
-#### NFA4: Wartbarkeit
-- **NFA4.1:** Klare Verzeichnisstruktur
-- **NFA4.2:** Konsistente Namenskonventionen
-- **NFA4.3:** Dokumentation aller Entscheidungen
-- **NFA4.4:** Regelmäßige Reviews und Aktualisierungen
+Out of Scope:
+- Nicht dokumentierte Zusatzsysteme ausserhalb des Repositories
+- Externe Betriebsprozesse ohne Bezug zu diesem Projekt
 
 ---
 
-## 3. Systemarchitektur
+## 2. Quellenbasis fuer die Konsolidierung
 
-### 3.1 Verzeichnisstruktur
-
-```
-docs/handbuch/
-├── PFLICHTENHEFT.md              # Dieses Dokument
-├── ARCHITEKTUR.md                # Technische Architektur
-├── README.md                     # Übersicht und Quick-Start
-├── MARSCHPLAN.md                 # Milestones und Roadmap
-│
-├── routinen/                     # Alle praktischen Routinen
-│   ├── kurzfristig/              # Täglich/Wöchentlich
-│   ├── mittelfristig/            # Monatlich/Quartalsweise
-│   └── langfristig/              # Jährlich/Strategisch
-│
-├── templates/                    # Vorlagen und Blueprints
-│   ├── routine-template.md       # Standard-Routine-Template
-│   └── beispiel-routine.md       # Dokumentiertes Beispiel
-│
-├── prozesse/                     # Prozess & Governance
-│   ├── neue-routine-erstellen.md # Leitfaden für neue Routinen
-│   ├── routine-aktualisieren.md  # Updating & Maintenance
-│   ├── redundanz-management.md   # Redundanzen eliminieren
-│   └── review-prozess.md         # Review- und Genehmigungen
-│
-└── marschplaene/                 # Marschpläne & Planung
-    ├── phase1-setup.md           # Phase 1: Grundstruktur
-    ├── phase2-expansion.md       # Phase 2: Routinen-Katalog
-    └── machbarkeit.md            # Machbarkeitsanalysen
-```
-
-### 3.2 Datenfluss
-
-```
-Neue Anforderung
-    ↓
-Leitfaden nutzen (neue-routine-erstellen.md)
-    ↓
-Template ausfüllen (routine-template.md)
-    ↓
-Review Process (review-prozess.md)
-    ↓
-In Kategorie einordnen (kurzfristig/mittelfristig/langfristig)
-    ↓
-Redundanzen-Analyse (redundanz-management.md)
-    ↓
-Genehmigung & Veröffentlichung
-    ↓
-Changelog aktualisieren
-    ↓
-Git Commit & Push
-```
-
-### 3.3 Abhängigkeitsmodell
-
-- **Routinen:** Basieren auf Templates
-- **Templates:** Folgen Standard-Format
-- **Prozesse:** Regeln die Verwaltung
-- **Marschpläne:** Steuern die Umsetzung
+Die Anforderungen wurden zusammengefuehrt aus:
+- uploads/README.md (Systemziele, Architektur, Security, Qualitaet)
+- docs/handbuch/ARCHITEKTUR.md (Architektur- und Governance-Rahmen)
+- docs/handbuch/prozesse/qualitaets-gates-automatisierung.md (Pflicht-Gates)
+- docs/handbuch/prozesse/review-prozess.md (Review- und Freigabekriterien)
+- docs/handbuch/prozesse/redundanz-management.md (DRY/Redundanz-Regeln)
+- Repository-Regeln aus .github/copilot-instructions.md (verbindliche Repo-Qualitaetsregeln)
 
 ---
 
-## 4. Erfolgskriterien
+## 3. SSOT-Regel
 
-### 4.1 Phase 1: Grundstruktur (Wochen 1-2)
-- [ ] Alle Verzeichnisse erstellt
-- [ ] Alle Template-Dokumente vorliegen
-- [ ] Prozess-Dokumentation vollständig
-- [ ] Review-Prozess definiert
-
-### 4.2 Phase 2: Erste Routinen (Wochen 3-4)
-- [ ] Mindestens 5 kurzfristige Routinen dokumentiert
-- [ ] 3 mittelfristige Routinen
-- [ ] 2 langfristige Routinen
-- [ ] Keine Redundanzen zwischen Routinen
-
-### 4.3 Phase 3: Optimierung (Wochen 5-6)
-- [ ] Redundanz-Analyse durchgeführt
-- [ ] System-Performance optimiert
-- [ ] Automatisierte Validierung implementiert
-- [ ] Vollständige Dokumentation aller Entscheidungen
-
-### 4.4 Phase 4: Wartung (Laufend)
-- [ ] Monatliche Audits durchführen
-- [ ] Backups regelmäßig erstellen
-- [ ] Feedback-Prozess implementiert
-- [ ] Kontinuierliche Verbesserung
+Dieses Pflichtenheft ist die normative Quelle fuer Anforderungen.
+Andere Dokumente duerfen ergaenzen, aber nicht widersprechen.
+Bei Konflikten hat dieses Dokument Prioritaet.
 
 ---
 
-## 5. Umfang & Abgrenzung
+## 4. Anforderungskatalog
 
-### 5.1 In Scope
-- Dokumentation aller Lernroutinen
-- Templates und Vorlagen
-- Prozess-Dokumentation
-- Marschpläne und Meilensteine
-- Versionskontrolle via Git
-- Redundanz-Management
+### 4.1 Funktionale Systemanforderungen (SYS)
 
-### 5.2 Out of Scope
-- Automatisierte Workflow-Engine (kann später folgen)
-- Datenbank-System (aktuell: Markdowneine)
-- Mobile App (kann später folgen)
-- Automatische Routine-Ausführung
+- SYS-01 Webanwendung: Das System stellt eine webbasierte Anwendung mit responsiver Nutzung auf Desktop und Mobile bereit.
+- SYS-02 Frontend: Das Frontend nutzt die im Repository vorgesehenen Web-Komponenten unter webapp fuer UI und Interaktion.
+- SYS-03 API-Layer: Das System stellt eine Python-API bereit, die Anwendungsfunktionen gekapselt bereitstellt.
+- SYS-04 Domaenenlogik: Das System enthaelt Java-basierte Domaenenlogik mit MVC-orientierter Trennung in Modell, Steuerung und View-Komponenten.
+- SYS-05 Persistenz: Das System ermoeglicht persistente Datenhaltung (MySQL als Standardpfad; dateibasierte Daten fuer einfache Service-Daten sind zulaessig).
+- SYS-06 Live-Testfaehigkeit: Das System ist lokal in einer lauffaehigen Testumgebung per Docker Compose startbar.
+- SYS-07 Routine-Wissensbasis: Das System ermoeglicht die strukturierte Verwaltung von Routinen in kurz-, mittel- und langfristigen Kategorien.
+- SYS-08 Template-basierte Erfassung: Neue Routinen werden ueber standardisierte Templates erfasst.
+- SYS-09 Reviewfaehigkeit: Neue und geaenderte Inhalte sind fuer einen formalen Review- und Freigabeprozess aufbereitbar.
 
----
+### 4.2 Repository- und Prozessanforderungen (REP)
 
-## 6. Ressourcen & Aufwand
+- REP-01 Git-first: Alle Aenderungen erfolgen versioniert im Repository.
+- REP-02 PR-Pflicht: Aenderungen werden ueber Branch + Pull Request mit Review freigegeben.
+- REP-03 Quality-Gate-Pflicht: Vor Abschluss muessen alle drei Pflichtpruefungen erfolgreich sein:
+  - bash scripts/validate-security.sh
+  - bash scripts/validate-architecture.sh
+  - bash scripts/validate-docs.sh
+- REP-04 Dokumentationspflicht: Relevante Codeaenderungen muessen im Handbuch dokumentiert werden.
+- REP-05 Changelog/Versionierung: Fachlich relevante Dokumentaenderungen muessen nachvollziehbar versioniert werden.
+- REP-06 Redundanzfreiheit: Anforderungen, Prozesse und Routinen duerfen nicht unnoetig dupliziert werden; bei Ueberlappung ist zu konsolidieren oder zu referenzieren.
+- REP-07 SSOT-Pflege: Jede Information soll nur einmal als Primarquelle gepflegt und sonst referenziert werden.
 
-### 6.1 Zeitschätzung
-- **Phase 1 (Grundstruktur):** 2 Wochen
-- **Phase 2 (Routinen):** 2 Wochen
-- **Phase 3 (Optimierung):** 2 Wochen
-- **Phase 4 (Wartung):** Laufend
-- **Gesamt:** 6 Wochen + Pflege
+### 4.3 Architektur- und Designanforderungen (ARC)
 
-### 6.2 Ressourcen
-- 1 Projektleiter/Dokumentateur
-- Zugang zu Git Repository
-- Markdown-Editor (VS Code)
-- Test-Umgebung für Validierung
+- ARC-01 OOP und Kapselung zuerst: Interne Zustaende duerfen nicht unkontrolliert mutierbar nach aussen gereicht werden.
+- ARC-02 Trennung von Verantwortlichkeiten: Komponenten sind klar nach Zustaendigkeit getrennt.
+- ARC-03 Erweiterbarkeit vor Kurzfrist-Loesungen: Designentscheidungen muessen Erweiterungen ermoeglichen.
+- ARC-04 Wiederverwendbarkeit: Gemeinsame Logik ist zu extrahieren statt zu kopieren.
+- ARC-05 Keine Architekturverletzung: Schichtbrueche und inkonsistente Querverdrahtung sind zu vermeiden.
 
----
+### 4.4 Sicherheitsanforderungen (SEC)
 
-## 7. Risiken & Mitigationsmaßnahmen
+- SEC-01 Keine Secrets im Repo: Geheime Zugangsdaten duerfen nicht versioniert werden.
+- SEC-02 Keine schwachen Defaults: Unsichere Standard-Credentials sind unzulaessig.
+- SEC-03 Keine internen Fehlerdetails an Clients: Interne Exception-Details duerfen nicht ungefiltert ausgeliefert werden.
+- SEC-04 Secure by Default: Neue Komponenten sind mit sicherem Standardverhalten zu implementieren.
+- SEC-05 Betriebsstabilitaet: Sicherheitsrelevante Verstoesse blockieren Merge/Freigabe.
 
-| Risiko | Wahrscheinlichkeit | Impact | Mitigation |
-|--------|-------------------|--------|-----------|
-| Redundanzen entstehen trotz System | Hoch | Mittel | Regelmäßige Audits, Checklisten |
-| Dokumentation wird nicht gepflegt | Mittel | Hoch | Review-Prozess,Ownerschaft |
-| System wird zu komplex | Mittel | Mittel | Iteratives Design, Feedback |
-| Git-Konflikte | Niedrig | Mittel | Templates, Konventionen, PRs |
+### 4.5 Qualitaets- und Wartbarkeitsanforderungen (NFA)
 
----
-
-## 8. Nächste Schritte
-
-1. ✅ Verzeichnisstruktur aufgebaut
-2. ⏳ Architektur-Dokument erstellen
-3. ⏳ Templates definieren und dokumentieren
-4. ⏳ Prozesse schreiben
-5. ⏳ Marschplan mit konkreten Todos
-6. ⏳ Erste Routinen-Beispiele dokumentieren
-7. ⏳ Review- und Genehmigungsprozess starten
+- NFA-01 Wartbarkeit: Struktur, Benennung und Verantwortlichkeiten sind konsistent zu halten.
+- NFA-02 Nachvollziehbarkeit: Entscheidungen, Aenderungen und Freigaben sind revisionsfaehig zu dokumentieren.
+- NFA-03 Testbarkeit: Kritische Funktionen sind in testbarer Form bereitzustellen (z. B. Java-Modelltests, API-Checks).
+- NFA-04 Effizienz: Prozesse sollen mit geringem manuellen Overhead funktionieren und wiederholbare Routinepfade bieten.
+- NFA-05 Skalierbarkeit der Doku: Das Handbuch muss mit wachsender Anzahl Routinen ohne Strukturbruch nutzbar bleiben.
 
 ---
 
-**Kontakt & Support:**  
-Für Fragen zur Wissensdatenbank: Siehe MARSCHPLAN.md und prozesse/neue-routine-erstellen.md
+## 5. Verbindliche Abnahmekriterien
 
-**Version History:**
+Eine Aenderung gilt nur dann als anforderungskonform, wenn folgende Kriterien erfuellt sind:
+
+1. Alle betroffenen Anforderungen aus Abschnitt 4 sind adressiert.
+2. Alle drei Pflicht-Gates laufen erfolgreich:
+   - bash scripts/validate-security.sh
+   - bash scripts/validate-architecture.sh
+   - bash scripts/validate-docs.sh
+3. Dokumentationsaenderungen sind im Handbuch enthalten, falls fachlich oder technisch relevant.
+4. Keine neue Redundanz wurde eingefuehrt (Code oder Doku).
+5. Review erfolgte gemaess review-prozess.md.
+
+---
+
+## 6. Rueckverfolgbarkeit (Traceability)
+
+| Konsolidierte Quelle | Ergebnis im Katalog |
+|---|---|
+| uploads/README.md Kernanforderungen (Web, MVC, Persistenz, Sicherheit, DRY, Live-Test, Doku) | SYS-01..SYS-09, SEC-01..SEC-05, NFA-01..NFA-05 |
+| docs/handbuch/ARCHITEKTUR.md (SSOT, DRY, Git-first, Governance) | REP-01..REP-07, ARC-01..ARC-05 |
+| prozesse/qualitaets-gates-automatisierung.md | REP-03, SEC-05, Abnahmekriterien 2 |
+| prozesse/review-prozess.md | REP-02, Abnahmekriterien 5 |
+| prozesse/redundanz-management.md | REP-06, REP-07 |
+| Repo-Regeln (.github/copilot-instructions.md) | ARC-01..ARC-05, SEC-01..SEC-04, REP-03, REP-04 |
+
+---
+
+## 7. Pflegeprozess fuer Anforderungen
+
+Bei jeder Aenderung mit Anforderungswirkung gilt:
+
+1. Betroffene IDs aus Abschnitt 4 identifizieren.
+2. Anpassung zuerst hier im Pflichtenheft vornehmen.
+3. Danach ARCHITEKTUR.md, Prozessdokumente und weitere Handbuchseiten konsistent nachziehen.
+4. Pflicht-Gates ausfuehren.
+5. Versionshistorie aktualisieren.
+
+---
+
+## 8. Version History
+
 - v1.0 (23.03.2026): Initiales Pflichtenheft erstellt
+- v2.0 (16.04.2026): Vollstaendige Konsolidierung Systemanforderungen + Repository-Anforderungen als SSOT

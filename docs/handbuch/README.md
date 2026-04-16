@@ -52,7 +52,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 - **[anleitungen/java-live-test.md](anleitungen/java-live-test.md)** - Java-App testen: Headless-Test im Codespace & GUI lokal starten
 
 ### 🔧 Grundlagen & Setup
-- **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Alles über das System & Anforderungen
+- **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Verbindliche SSOT-Systemanforderung (System + Repo)
 - **[ARCHITEKTUR.md](ARCHITEKTUR.md)** - Wie das System funktioniert
 - **[MARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)** - Zeitplan & Meilenstones
 
@@ -79,7 +79,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 ```
 docs/handbuch/
 ├── README.md (du bist hier)
-├── PFLICHTENHEFT.md          ← Anforderungen & Ziele
+├── PFLICHTENHEFT.md          ← Verbindliche Systemanforderung (SSOT)
 ├── ARCHITEKTUR.md            ← System-Design
 │
 ├── routinen/                 ← ALLE Lernroutinen

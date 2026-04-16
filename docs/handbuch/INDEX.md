@@ -10,7 +10,7 @@
 - **[README.md](README.md)** - Start hier! Quick-Start & Übersicht (5 Min)
 
 ### 📖 Kernliteratur (Lesen in dieser Reihenfolge!)
-1. **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Anforderungen, Ziele, Umfang
+1. **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Verbindliche SSOT-Systemanforderung (System + Repo)
 2. **[ARCHITEKTUR.md](ARCHITEKTUR.md)** - System-Design, Komponenten, Datenfluss
 3. **[MARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)** - Phasen, Milestones, Zeitplan
 
@@ -59,7 +59,7 @@
 3. Approver oder Reject (mit Begründung)
 
 ### ...das System verstehen → [ARCHITEKTUR.md](ARCHITEKTUR.md) + [PFLICHTENHEFT.md](PFLICHTENHEFT.md)
-1. Lese PFLICHTENHEFT (Anforderungen)
+1. Lese PFLICHTENHEFT (verbindliche Anforderungen)
 2. Lese ARCHITEKTUR (Design)
 3. Lese MARSCHPLAN (Zeitplan)
 

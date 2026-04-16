@@ -72,7 +72,7 @@ Was ist das Ergebnis dieser Routine?
 **Zweck:** Konsistenz und Wiederverwendbarkeit sicherstellen
 
 **Verwaltung:**
-- Master-Template in `templates/routine-template.md`
+- Master-Template in `templates/ROUTINE-TEMPLATE.md`
 - Beispiel-Implementierung in `templates/beispiel-routine.md`
 - Spezialvorlagen für unterschiedliche Routine-Typen (Code, Prozess, Analyse)
 
@@ -195,8 +195,6 @@ Das System ist für folgende Erweiterungen ausgelegt:
 Git Repository Level:
 ├── main branch
 │   └── Nach Approval mergen (geschützt)
-├── develop branch
-│   └── Feature Branches + PRs
 └── feature/* branches
     └── Frei für Entwickler
 ```
@@ -267,7 +265,7 @@ Bei 100+ Routinen:
    docs/handbuch/routinen/[kategorie]/ROUTINE-XXX.md
 
 3. Template ausfüllen
-   (Nach templates/routine-template.md)
+   (Nach templates/ROUTINE-TEMPLATE.md)
 
 4. Lokal testen & Review
    - Formatierung prüfen
@@ -281,13 +279,9 @@ Bei 100+ Routinen:
    - Beschreibung: Was wurde am System gelernt?
    - Reviewer: Min. 1 Person
 
-6. Merge in develop
+6. Merge in main
    - Nach Approval
    - Changelog aktualisieren
-
-7. Release in main
-   - Via Release-PR
-   - Tags für Versionen
 ```
 
 ---
@@ -318,3 +312,4 @@ Bei 100+ Routinen:
 **Version History:**
 - v1.0 (23.03.2026): Initiale Architektur dokumentiert
 - v1.1 (25.03.2026): Qualitaets-Gates als Pflichtprozess und Validierungsschritte integriert
+- v1.2 (16.04.2026): Konsolidierungsabgleich mit SSOT-Pflichtenheft (Template-Pfad, Branch-Flow)

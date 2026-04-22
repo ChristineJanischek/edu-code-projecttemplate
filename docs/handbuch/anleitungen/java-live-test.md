@@ -4,12 +4,13 @@
 
 ---
 
-## Übersicht: Zwei Test-Modi
+## Übersicht: Drei Test-Modi
 
 | Modus | Voraussetzung | Einsatz |
 |---|---|---|
 | **Headless-Modell-Test** | Nur Java (kein Display) | Codespace, CI, Terminal |
 | **GUI starten** | Java + lokales Display | Lokale Entwicklung, Windows/Mac |
+| **Docker-Live-Test** | Docker Compose im Repo | Codespace, Terminal, Live-Neutest bei Aenderungen |
 
 ---
 
@@ -124,6 +125,96 @@ Das Hauptfenster des Volleyball-Team-Managers öffnet sich.
 
 ---
 
+## Modus 3 – Docker-Live-Test im Repo und Codespace
+
+Dieser Modus startet einen eigenen Java-Container fuer `src/volleyball/`.
+Der Container kompiliert die App headless, fuehrt `ModelSmokeTest` aus und beobachtet danach den Ordner `src/volleyball/` auf Aenderungen.
+Bei jeder gespeicherten Aenderung wird der Test automatisch erneut ausgefuehrt.
+
+### Voraussetzungen im Codespace
+
+Die Voraussetzungen sind im Repository bereits vorbereitet:
+
+- Der Devcontainer aktiviert Docker-in-Docker und Java 17.
+- `bash scripts/bootstrap.sh` setzt die Skriptrechte.
+- Der Compose-Service `java-live-test` ist in [docker-compose.yml](docker-compose.yml) hinterlegt.
+
+### Schritt 1 – Codespace oder lokale Shell im Projektroot oeffnen
+
+```bash
+cd /workspaces/edu-code-projecttemplate
+```
+
+### Schritt 2 – Docker-Einmaltest ausfuehren
+
+```bash
+bash scripts/test-java-docker.sh
+```
+
+Dieser Befehl:
+1. Baut das Image aus [docker/java-live-test/Dockerfile](docker/java-live-test/Dockerfile)
+2. Startet einen Container nur fuer den Headless-Test
+3. Kompiliert `src/volleyball/*.java`
+4. Fuehrt `volleyball.ModelSmokeTest` im Container aus
+
+Erwartung: Der Befehl endet erfolgreich mit den bekannten PASS-Meldungen aus dem Modell-Smoke-Test.
+
+### Schritt 3 – Live-Test-Container starten
+
+```bash
+bash scripts/start-java-live-test.sh
+```
+
+Der Container bleibt danach aktiv und beobachtet den Java-Quellordner.
+
+### Schritt 4 – Live-Logs verfolgen
+
+```bash
+bash scripts/logs-java-live-test.sh
+```
+
+Erwartete Logfolge beim Start:
+
+```text
+[java-live-test] Starte initialen Headless-Test
+[java] Kompilierung erfolgreich
+[java] Starte Headless-Modell-Smoke-Tests...
+...
+[java-live-test] Headless-Test erfolgreich
+[java-live-test] Beobachte src/volleyball auf Aenderungen
+```
+
+### Schritt 5 – Aenderung live pruefen
+
+1. Eine Datei unter `src/volleyball/` anpassen und speichern.
+2. Die Logausgabe beobachten.
+3. Der Container startet die Kompilierung und die Smoke-Tests automatisch erneut.
+
+Erwartete Logfolge nach einer Aenderung:
+
+```text
+[java-live-test] Aenderung erkannt, teste erneut...
+[java] Kompilierung erfolgreich
+[java] Starte Headless-Modell-Smoke-Tests...
+...
+```
+
+### Schritt 6 – Live-Test wieder stoppen
+
+```bash
+bash scripts/stop-java-live-test.sh
+```
+
+### Wann dieser Modus sinnvoll ist
+
+| Situation | Empfohlener Modus |
+|---|---|
+| Schneller Einzelcheck in Docker | `bash scripts/test-java-docker.sh` |
+| Laufende Entwicklung im Codespace | `bash scripts/start-java-live-test.sh` |
+| GUI-Validierung auf lokalem Rechner | `java -cp build/java volleyball.MainWindow` |
+
+---
+
 ## Alle Dienste gemeinsam testen (Java + Docker-Services)
 
 Um Java-Test zusammen mit MySQL, Python-API und PHP-Webapp zu prüfen:
@@ -170,6 +261,28 @@ javac -d build/java src/volleyball/*.java
 java -cp build/java volleyball.MainWindow
 ```
 
+### Fehler: `docker compose` meldet fehlende Berechtigung oder Daemon nicht erreichbar
+
+Ursache: Docker-in-Docker ist im Codespace noch nicht bereit oder Docker laeuft lokal nicht.
+
+Loesung:
+```bash
+docker version
+bash scripts/test-java-docker.sh
+```
+
+Falls `docker version` fehlschlaegt, den Codespace neu laden oder lokal Docker Desktop/Engine starten.
+
+### Fehler: Live-Test reagiert nicht auf Aenderungen
+
+Ursache: Der Watch-Container laeuft nicht oder die Logs werden nicht verfolgt.
+
+Loesung:
+```bash
+bash scripts/start-java-live-test.sh
+bash scripts/logs-java-live-test.sh
+```
+
 ---
 
 ## Projektstruktur der Java-App
@@ -193,4 +306,5 @@ src/volleyball/
 ---
 
 **Erstellt:** 26.03.2026  
-**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-services.sh`
+**Aktualisiert:** 22.04.2026  
+**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-java-docker.sh`, `scripts/start-java-live-test.sh`, `scripts/logs-java-live-test.sh`, `scripts/stop-java-live-test.sh`, `scripts/test-services.sh`

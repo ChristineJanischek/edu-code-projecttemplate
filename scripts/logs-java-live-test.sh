@@ -5,6 +5,4 @@ set -euo pipefail
 source "$(dirname "$0")/lib/compose.sh"
 
 require_compose_cmd
-compose_cmd down
-
-echo "[stop] Dienste gestoppt"
+compose_cmd logs -f java-live-test

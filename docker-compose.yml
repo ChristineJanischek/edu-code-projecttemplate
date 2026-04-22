@@ -1,4 +1,21 @@
 services:
+  java-live-test:
+    profiles:
+      - java-live-test
+    build:
+      context: .
+      dockerfile: docker/java-live-test/Dockerfile
+    container_name: edu_java_live_test
+    restart: unless-stopped
+    working_dir: /workspace
+    command: ["bash", "./scripts/java-live-test-runner.sh", "watch"]
+    environment:
+      JAVA_TOOL_OPTIONS: -Djava.awt.headless=true
+    volumes:
+      - .:/workspace
+    networks:
+      - appnet
+
   mysql:
     image: mysql:8.4
     container_name: edu_mysql

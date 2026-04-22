@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# shellcheck source=scripts/lib/compose.sh
+source "$(dirname "$0")/lib/compose.sh"
+
 # .env laden falls vorhanden, damit alle Variablen gesetzt sind
 if [[ -f .env ]]; then
   set -a
@@ -20,7 +23,7 @@ function require_cmd() {
 }
 
 require_cmd curl
-require_cmd docker
+require_compose_cmd
 
 echo "[test] Pruefe Python-Health..."
 curl -fsS "http://localhost:${python_port}/health" >/tmp/python_health.json
@@ -35,7 +38,7 @@ curl -fsS "http://localhost:${php_port}" >/tmp/php_index.html
 head -n 5 /tmp/php_index.html
 
 echo "[test] Pruefe MySQL in Container..."
-docker compose exec -T mysql mysql -u"${MYSQL_USER:-appuser}" -p"${MYSQL_PASSWORD:-apppassword}" "${MYSQL_DATABASE:-appdb}" -e "SELECT COUNT(*) AS demo_items_count FROM demo_items;"
+compose_cmd exec -T mysql mysql -u"${MYSQL_USER:-appuser}" -p"${MYSQL_PASSWORD:-apppassword}" "${MYSQL_DATABASE:-appdb}" -e "SELECT COUNT(*) AS demo_items_count FROM demo_items;"
 
 echo "[test] Starte Java-Smoke-Test..."
 ./scripts/test-java.sh

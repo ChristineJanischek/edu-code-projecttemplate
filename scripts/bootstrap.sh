@@ -9,3 +9,4 @@ fi
 chmod +x scripts/*.sh
 
 echo "[bootstrap] Fertig. Nutze: ./scripts/start-services.sh"
+echo "[bootstrap] Java-Live-Test in Docker: ./scripts/start-java-live-test.sh"

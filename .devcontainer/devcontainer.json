@@ -19,7 +19,7 @@
       "installZsh": "false",
       "installOhMyZsh": "false",
       "upgradePackages": "true",
-      "packages": "mysql-client curl jq"
+      "packages": "mysql-client curl jq docker-compose-plugin"
     }
   },
   "customizations": {

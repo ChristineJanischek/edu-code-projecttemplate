@@ -1,9 +1,9 @@
-FROM eclipse-temurin:17-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /workspace
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends inotify-tools \
+    && apt-get install -y --no-install-recommends inotify-tools xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 COPY src/volleyball ./src/volleyball

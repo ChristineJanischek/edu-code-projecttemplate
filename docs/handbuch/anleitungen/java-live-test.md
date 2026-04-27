@@ -10,6 +10,7 @@
 |---|---|---|
 | **Headless-Modell-Test** | Nur Java (kein Display) | Codespace, CI, Terminal |
 | **GUI starten** | Java + lokales Display | Lokale Entwicklung, Windows/Mac |
+| **GUI-Starttest im Docker-Codespace** | Docker Compose + Xvfb im Test-Image | Codespace, technischer GUI-Startcheck |
 | **Docker-Live-Test** | Docker Compose im Repo | Codespace, Terminal, Live-Neutest bei Aenderungen |
 
 ---
@@ -114,6 +115,29 @@ java -cp build/java volleyball.MainWindow
 
 Das Hauptfenster des Volleyball-Team-Managers öffnet sich.
 
+## Modus 2b - GUI-Starttest im aktuellen Codespace (Docker)
+
+Dieser Modus startet `volleyball.MainWindow` im Docker-Testcontainer mit virtuellem Display (Xvfb).
+So kann der GUI-Start im Codespace reproduzierbar getestet werden, auch wenn keine sichtbare Desktop-GUI verfuegbar ist.
+
+### Schritt 1 - Pflicht-Erweiterungen sicherstellen (einmalig/bei Bedarf)
+
+```bash
+bash scripts/ensure-vscode-extensions.sh
+```
+
+### Schritt 2 - GUI-Starttest im Dockerpfad ausfuehren
+
+```bash
+bash scripts/test-java-gui-docker.sh
+```
+
+Erwartung:
+- Erfolgreich mit `GUI gestartet und beendet` oder
+- Erfolgreich mit `GUI-Start erfolgreich (8s Laufzeitfenster erreicht)`
+
+Hinweis: Dieser Modus prueft den GUI-Start technisch im Codespace. Fuer eine sichtbare Interaktion mit Swing nutze weiterhin einen lokalen Rechner mit Display.
+
 ### App-Funktionen in der GUI
 
 | Funktion | Beschreibung |
@@ -148,6 +172,10 @@ cd /workspaces/edu-code-projecttemplate
 bash scripts/bootstrap.sh
 ```
 
+`bootstrap.sh` fuehrt bereits die Runtime- und Erweiterungsroutine aus:
+- `bash scripts/ensure-devcontainer-runtime.sh`
+- `bash scripts/ensure-vscode-extensions.sh`
+
 3. Live-Test starten:
 
 ```bash
@@ -180,6 +208,9 @@ Die Voraussetzungen sind im Repository bereits vorbereitet:
 
 - Der Devcontainer aktiviert Docker-in-Docker und Java 21.
 - `bash scripts/bootstrap.sh` setzt die Skriptrechte.
+- Der Devcontainer startet bei jedem Codespace-Start automatisch:
+  - `bash scripts/ensure-devcontainer-runtime.sh`
+  - `bash scripts/ensure-vscode-extensions.sh`
 - Der Compose-Service `java-live-test` ist in [docker-compose.yml](docker-compose.yml) hinterlegt.
 
 ### Schritt 1 – Codespace oder lokale Shell im Projektroot oeffnen
@@ -315,7 +346,8 @@ bash scripts/test-java.sh
 ```
 
 Wichtig: Die Java-Swing-GUI (`MainWindow`) ist im Standard-Codespace normalerweise nicht sichtbar nutzbar.
-Nutze fuer GUI-Tests einen lokalen Rechner mit Display.
+Nutze fuer den technischen Codespace-Check `bash scripts/test-java-gui-docker.sh`.
+Nutze fuer sichtbare GUI-Tests einen lokalen Rechner mit Display.
 
 ### Fehler: `class not found: volleyball.MainWindow`
 
@@ -403,5 +435,5 @@ src/volleyball/
 ---
 
 **Erstellt:** 26.03.2026  
-**Aktualisiert:** 23.04.2026  
-**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-java-docker.sh`, `scripts/start-java-live-test.sh`, `scripts/logs-java-live-test.sh`, `scripts/stop-java-live-test.sh`, `scripts/test-services.sh`
+**Aktualisiert:** 27.04.2026  
+**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-java-docker.sh`, `scripts/test-java-gui-docker.sh`, `scripts/start-java-live-test.sh`, `scripts/logs-java-live-test.sh`, `scripts/stop-java-live-test.sh`, `scripts/test-services.sh`

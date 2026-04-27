@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "17"
+      "version": "21"
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.12"
@@ -33,5 +33,6 @@
       ]
     }
   },
-  "postCreateCommand": "bash scripts/bootstrap.sh"
+  "postCreateCommand": "bash scripts/bootstrap.sh",
+  "postStartCommand": "bash scripts/ensure-devcontainer-runtime.sh && bash scripts/ensure-vscode-extensions.sh"
 }

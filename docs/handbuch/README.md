@@ -69,6 +69,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 
 ### 📚 Routinen nach Kategorie
 - **[routinen/kurzfristig/](routinen/kurzfristig/)** - Täglich/Wöchentlich
+- **[routinen/kurzfristig/KF-ROUTINE-007-codespace-erweiterungen-sicherstellen.md](routinen/kurzfristig/KF-ROUTINE-007-codespace-erweiterungen-sicherstellen.md)** - Codespace-Erweiterungen bei jedem Start sicherstellen
 - **[routinen/mittelfristig/](routinen/mittelfristig/)** - Monatlich/Quartalsweise
 - **[routinen/langfristig/](routinen/langfristig/)** - Jährlich/Strategisch
 

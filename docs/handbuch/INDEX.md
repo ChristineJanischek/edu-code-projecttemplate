@@ -30,6 +30,7 @@
 
 ### 📚 Routinen-Katalog
 - **[routinen/kurzfristig/](routinen/kurzfristig/)** - Täglich/Wöchentlich (Kurzzeitaufgaben)
+- **[routinen/kurzfristig/KF-ROUTINE-007-codespace-erweiterungen-sicherstellen.md](routinen/kurzfristig/KF-ROUTINE-007-codespace-erweiterungen-sicherstellen.md)** - Codespace-Erweiterungen bei jedem Start sicherstellen
 - **[routinen/mittelfristig/](routinen/mittelfristig/)** - Monatlich/Quartalsweise (Mittelfristig)
 - **[routinen/langfristig/](routinen/langfristig/)** - Jährlich/Strategisch (Langfristig)
 
@@ -183,7 +184,7 @@ handbuch/
 - [x] Marschplan erstellt
 
 ### 🔄 Phase 2: Inhalte (IN BEARBEITUNG)
-- [ ] Kurzfristige Routinen dokumentieren (Ziel: 5+)
+- [ ] Kurzfristige Routinen dokumentieren (Ziel: 5+, aktuell: 2)
 - [ ] Mittelfristige Routinen dokumentieren (Ziel: 3+)
 - [ ] Langfristige Routinen dokumentieren (Ziel: 2+)
 

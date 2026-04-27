@@ -4,7 +4,12 @@ set -euo pipefail
 # shellcheck source=scripts/lib/compose.sh
 source "$(dirname "$0")/lib/compose.sh"
 
-require_compose_cmd
+if ! require_compose_cmd; then
+	echo "[java-docker-test] Hinweis: Docker Compose nicht verfuegbar, fuehre lokalen Java-Test aus" >&2
+	bash "$(dirname "$0")/test-java.sh"
+	exit $?
+fi
+
 compose_cmd --profile java-live-test build java-live-test
 compose_cmd --profile java-live-test run --rm --no-deps java-live-test bash ./scripts/java-live-test-runner.sh once
 

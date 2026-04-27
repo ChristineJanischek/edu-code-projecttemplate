@@ -11,6 +11,7 @@
 | **Headless-Modell-Test** | Nur Java (kein Display) | Codespace, CI, Terminal |
 | **GUI starten** | Java + lokales Display | Lokale Entwicklung, Windows/Mac |
 | **GUI-Starttest im Docker-Codespace** | Docker Compose + Xvfb im Test-Image | Codespace, technischer GUI-Startcheck |
+| **Sichtbare GUI im Codespace** | noVNC-Bridge + virtueller Desktop | Codespace, interaktiver Swing-Test im Browser |
 | **Docker-Live-Test** | Docker Compose im Repo | Codespace, Terminal, Live-Neutest bei Aenderungen |
 
 ---
@@ -138,6 +139,51 @@ Erwartung:
 
 Hinweis: Dieser Modus prueft den GUI-Start technisch im Codespace. Fuer eine sichtbare Interaktion mit Swing nutze weiterhin einen lokalen Rechner mit Display.
 
+## Modus 2c - Sichtbare Swing-GUI im Codespace (noVNC)
+
+Dieser Modus startet `volleyball.MainWindow` auf einem virtuellen Display und macht das Fenster per noVNC im Browser sichtbar.
+Die Grundlage wird bei jedem Codespace-Start automatisch vorbereitet.
+
+### Schritt 1 - Voraussetzungen automatisch sicherstellen
+
+```bash
+bash scripts/ensure-codespace-gui.sh
+```
+
+Erwartung:
+- Ausgabe mit `GUI-Bridge aktiv` oder `GUI-Bridge bereits aktiv`
+- Ausgabe mit einer `noVNC URL`
+
+### Schritt 2 - MainWindow sichtbar starten
+
+```bash
+bash scripts/start-java-gui-visible.sh
+```
+
+Erwartung:
+- Ausgabe mit `MainWindow gestartet`
+- Ausgabe mit derselben `noVNC URL`
+
+### Schritt 3 - Fenster im Browser oeffnen
+
+1. VS Code: Reiter **Ports** oeffnen.
+2. Port `6080` suchen (noVNC).
+3. Auf **Open in Browser** klicken.
+4. In noVNC die Verbindung bestaetigen.
+5. Das Swing-Fenster `Volleyball-Team-Manager` ist sichtbar und interaktiv.
+
+### Schritt 4 - GUI wieder stoppen
+
+```bash
+bash scripts/stop-java-gui-visible.sh
+```
+
+### Hinweise zur Automatik
+
+- Die Routine `bash scripts/ensure-codespace-gui.sh` laeuft automatisch bei jedem Codespace-Start (`postStartCommand`).
+- `bash scripts/bootstrap.sh` fuehrt die gleiche Routine ebenfalls aus.
+- Wenn Port `6080` in Codespaces als privat markiert ist, ihn im Reiter **Ports** auf Sichtbarkeit fuer den Browser stellen.
+
 ### App-Funktionen in der GUI
 
 | Funktion | Beschreibung |
@@ -211,6 +257,7 @@ Die Voraussetzungen sind im Repository bereits vorbereitet:
 - Der Devcontainer startet bei jedem Codespace-Start automatisch:
   - `bash scripts/ensure-devcontainer-runtime.sh`
   - `bash scripts/ensure-vscode-extensions.sh`
+  - `bash scripts/ensure-codespace-gui.sh`
 - Der Compose-Service `java-live-test` ist in [docker-compose.yml](docker-compose.yml) hinterlegt.
 
 ### Schritt 1 – Codespace oder lokale Shell im Projektroot oeffnen
@@ -347,7 +394,7 @@ bash scripts/test-java.sh
 
 Wichtig: Die Java-Swing-GUI (`MainWindow`) ist im Standard-Codespace normalerweise nicht sichtbar nutzbar.
 Nutze fuer den technischen Codespace-Check `bash scripts/test-java-gui-docker.sh`.
-Nutze fuer sichtbare GUI-Tests einen lokalen Rechner mit Display.
+Nutze fuer sichtbare GUI-Tests im Codespace `bash scripts/start-java-gui-visible.sh` und die noVNC-URL.
 
 ### Fehler: `class not found: volleyball.MainWindow`
 
@@ -412,6 +459,18 @@ bash scripts/start-java-live-test.sh
 bash scripts/logs-java-live-test.sh
 ```
 
+### Fehler: noVNC zeigt kein Fenster
+
+Ursache: GUI-Bridge oder MainWindow laeuft nicht.
+
+Loesung:
+```bash
+bash scripts/ensure-codespace-gui.sh
+bash scripts/start-java-gui-visible.sh
+```
+
+Danach Port `6080` im Reiter **Ports** oeffnen.
+
 ---
 
 ## Projektstruktur der Java-App
@@ -436,4 +495,4 @@ src/volleyball/
 
 **Erstellt:** 26.03.2026  
 **Aktualisiert:** 27.04.2026  
-**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-java-docker.sh`, `scripts/test-java-gui-docker.sh`, `scripts/start-java-live-test.sh`, `scripts/logs-java-live-test.sh`, `scripts/stop-java-live-test.sh`, `scripts/test-services.sh`
+**Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-java-docker.sh`, `scripts/test-java-gui-docker.sh`, `scripts/ensure-codespace-gui.sh`, `scripts/start-java-gui-visible.sh`, `scripts/stop-java-gui-visible.sh`, `scripts/start-java-live-test.sh`, `scripts/logs-java-live-test.sh`, `scripts/stop-java-live-test.sh`, `scripts/test-services.sh`

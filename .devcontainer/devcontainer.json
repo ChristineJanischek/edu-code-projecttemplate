@@ -19,7 +19,7 @@
       "installZsh": "false",
       "installOhMyZsh": "false",
       "upgradePackages": "true",
-      "packages": "mysql-client curl jq docker-compose-plugin"
+      "packages": "mysql-client curl jq docker-compose-plugin xvfb x11vnc websockify novnc fluxbox xterm"
     }
   },
   "customizations": {
@@ -34,5 +34,5 @@
     }
   },
   "postCreateCommand": "bash scripts/bootstrap.sh",
-  "postStartCommand": "bash scripts/ensure-devcontainer-runtime.sh && bash scripts/ensure-vscode-extensions.sh"
+  "postStartCommand": "bash scripts/ensure-devcontainer-runtime.sh && bash scripts/ensure-vscode-extensions.sh && bash scripts/ensure-codespace-gui.sh"
 }

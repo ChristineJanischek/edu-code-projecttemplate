@@ -7,11 +7,11 @@
 - **Zeitaufwand:** 2-5 Minuten
 - **Verantwortlicher:** Autor der Aenderung
 - **Abhaengigkeiten:** qualitaets-gates-automatisierung.md, review-prozess.md
-- **Version:** 1.0
+- **Version:** 1.2
 - **Letzte Aktualisierung:** 27.04.2026
 
 ## Ziel
-Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen aus der Devcontainer-Konfiguration installiert und verfuegbar sind und der GUI-Starttest fuer `src/volleyball/MainWindow.java` im Dockerpfad reproduzierbar ausfuehrbar bleibt.
+Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen aus der Devcontainer-Konfiguration installiert und verfuegbar sind, der GUI-Starttest fuer `src/volleyball/MainWindow.java` im Dockerpfad reproduzierbar ausfuehrbar bleibt und die sichtbare Swing-GUI via noVNC bereitsteht.
 
 ## Vorbedingungen
 - Codespace ist gestartet.
@@ -22,16 +22,19 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 1. Bei Codespace-Erstellung automatisch `bash scripts/bootstrap.sh` ausfuehren lassen (via `postCreateCommand`).
 2. Bei jedem weiteren Start automatisch `bash scripts/ensure-devcontainer-runtime.sh` ausfuehren lassen, um Docker-in-Docker und Java 21 zu validieren.
 3. Danach automatisch `bash scripts/ensure-vscode-extensions.sh` ausfuehren lassen (via `postStartCommand`).
-4. Fuer manuelle Pruefung bei Bedarf ausfuehren: `bash scripts/ensure-devcontainer-runtime.sh` und `bash scripts/ensure-vscode-extensions.sh`.
-5. Bei geaenderter Erweiterungsliste in `.devcontainer/devcontainer.json` die Routine direkt erneut ausfuehren.
-6. GUI-Starttest im Codespace verifizieren: `bash scripts/test-java-gui-docker.sh`.
-7. Ergebnis in der Shell verifizieren: Ausgabe endet mit `Devcontainer-Anforderungen erfuellt`, `Pflicht-Erweiterungen verfuegbar` und einer erfolgreichen GUI-Startmeldung.
+4. Danach automatisch `bash scripts/ensure-codespace-gui.sh` ausfuehren lassen (via `postStartCommand`).
+5. Fuer manuelle Pruefung bei Bedarf ausfuehren: `bash scripts/ensure-devcontainer-runtime.sh`, `bash scripts/ensure-vscode-extensions.sh` und `bash scripts/ensure-codespace-gui.sh`.
+6. Bei geaenderter Erweiterungsliste in `.devcontainer/devcontainer.json` die Routine direkt erneut ausfuehren.
+7. GUI-Starttest im Codespace verifizieren: `bash scripts/test-java-gui-docker.sh`.
+8. Sichtbare GUI pruefen: `bash scripts/start-java-gui-visible.sh` und noVNC-Port `6080` im Browser oeffnen.
+9. Ergebnis in der Shell verifizieren: Ausgabe endet mit `Devcontainer-Anforderungen erfuellt`, `Pflicht-Erweiterungen verfuegbar`, `GUI-Bridge aktiv` und einer erfolgreichen GUI-Startmeldung.
 
 ## Erfolgskriterien
 - Das Runtime-Skript bestaetigt `docker-in-docker aktiv, Java-Feature auf 21 konfiguriert`.
 - Das Skript meldet fuer jede Pflicht-Erweiterung entweder `OK` oder fuehrt eine erfolgreiche Nachinstallation aus.
 - Die Abschlussmeldung `Pflicht-Erweiterungen verfuegbar` erscheint ohne Fehler.
 - `bash scripts/test-java-gui-docker.sh` endet erfolgreich und bestaetigt den GUI-Start technisch.
+- `bash scripts/start-java-gui-visible.sh` liefert eine noVNC-URL und zeigt das Swing-Fenster im Browser.
 - Bei fehlender VS Code CLI im Codespace bricht das Skript mit klarer Fehlermeldung ab.
 
 ## Fehlerbehandlung
@@ -43,10 +46,12 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 - Fehler `Erweiterung fehlt nach Installationsversuch`: Extension-ID in Devcontainer pruefen und Installationsausgabe kontrollieren.
 - Fehler `Docker-Daemon nicht erreichbar`: Codespace neu starten und `bash scripts/ensure-devcontainer-runtime.sh` erneut ausfuehren.
 - Fehler `GUI-Start fehlgeschlagen`: `bash scripts/test-java-gui-docker.sh` erneut ausfuehren und die Docker-Build-/Run-Logs pruefen.
+- Fehler `noVNC nicht erreichbar`: `bash scripts/ensure-codespace-gui.sh` erneut ausfuehren und Port `6080` im Codespaces-Portpanel pruefen.
 
 ## Ausgaben/Ergebnisse
 - Konsistente Erweiterungsbasis in jedem Codespace-Startzyklus.
 - Reproduzierbarer GUI-Startcheck fuer `MainWindow` im Docker-Codespace.
+- Sichtbare, interaktive Swing-GUI im Codespace-Browser ueber noVNC.
 - Nachweisbarer Installations- und Verifikationslauf im Terminal.
 
 ## Verknuepfungen
@@ -56,5 +61,6 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 - [java-live-test.md](../../anleitungen/java-live-test.md)
 
 ## Changelog
+- v1.2 (27.04.2026): noVNC-GUI-Bridge fuer sichtbare Swing-Tests im Codespace ergaenzt
 - v1.1 (27.04.2026): GUI-Starttest im Dockerpfad und verfeinerte Verifikationsschritte ergaenzt
 - v1.0 (23.04.2026): Initiale Routine fuer persistente Erweiterungsabsicherung erstellt

@@ -10,6 +10,8 @@ chmod +x scripts/*.sh
 
 bash scripts/ensure-devcontainer-runtime.sh
 bash scripts/ensure-vscode-extensions.sh
+bash scripts/ensure-codespace-gui.sh
 
 echo "[bootstrap] Fertig. Nutze: ./scripts/start-services.sh"
 echo "[bootstrap] Java-Live-Test in Docker: ./scripts/start-java-live-test.sh"
+echo "[bootstrap] Sichtbare GUI im Codespace: ./scripts/start-java-gui-visible.sh"

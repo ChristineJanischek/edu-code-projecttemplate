@@ -3,7 +3,17 @@ FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /workspace
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends inotify-tools xvfb \
+    && apt-get install -y --no-install-recommends \
+       inotify-tools \
+       xvfb \
+       libxrender1 \
+       libxtst6 \
+       libxi6 \
+       libxext6 \
+       libx11-6 \
+       libxrandr2 \
+       libfreetype6 \
+       fontconfig \
     && rm -rf /var/lib/apt/lists/*
 
 COPY src/volleyball ./src/volleyball

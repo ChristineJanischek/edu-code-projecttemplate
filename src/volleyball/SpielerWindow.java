@@ -1,7 +1,6 @@
 package volleyball;
 
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -77,7 +76,7 @@ public class SpielerWindow extends JFrame {
         contentPane.add(scrollPane);
 
         JLabel lbBanner = new JLabel("");
-        lbBanner.setIcon(new ImageIcon(SpielerWindow.class.getResource("/image/logo_final.png")));
+        UiResources.setIconIfPresent(lbBanner, "/images/logo_final.png");
         lbBanner.setBounds(29, 213, 175, 30);
         contentPane.add(lbBanner);
     }

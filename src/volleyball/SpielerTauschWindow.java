@@ -1,7 +1,6 @@
 package volleyball;
 
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -71,7 +70,7 @@ public class SpielerTauschWindow extends JFrame {
         // Titel
         JLabel lbTitle = new JLabel("Spieler Tauschen");
         lbTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lbTitle.setIcon(new ImageIcon(SpielerTauschWindow.class.getResource("/image/ic_launcher.png")));
+        UiResources.setIconIfPresent(lbTitle, "/images/ic_launcher.png");
         lbTitle.setBounds(24, 11, 292, 78);
         contentPane.add(lbTitle);
 
@@ -119,7 +118,7 @@ public class SpielerTauschWindow extends JFrame {
 
         // Logo-Banner
         JLabel lbBanner = new JLabel("");
-        lbBanner.setIcon(new ImageIcon(SpielerTauschWindow.class.getResource("/image/logo_final.png")));
+        UiResources.setIconIfPresent(lbBanner, "/images/logo_final.png");
         lbBanner.setBounds(256, 315, 170, 30);
         contentPane.add(lbBanner);
 

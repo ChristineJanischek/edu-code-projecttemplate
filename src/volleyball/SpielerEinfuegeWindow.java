@@ -1,7 +1,6 @@
 package volleyball;
 
 import java.awt.Font;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -70,7 +69,7 @@ public class SpielerEinfuegeWindow extends JFrame {
         // Titel
         JLabel lbTitel = new JLabel("Spieler einfügen");
         lbTitel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lbTitel.setIcon(new ImageIcon(SpielerEinfuegeWindow.class.getResource("/image/ic_launcher.png")));
+        UiResources.setIconIfPresent(lbTitel, "/images/ic_launcher.png");
         lbTitel.setBounds(10, 0, 262, 81);
         contentPane.add(lbTitel);
 
@@ -109,7 +108,7 @@ public class SpielerEinfuegeWindow extends JFrame {
 
         // Logo-Banner
         JLabel lbBanner = new JLabel("");
-        lbBanner.setIcon(new ImageIcon(SpielerEinfuegeWindow.class.getResource("/image/logo_final.png")));
+        UiResources.setIconIfPresent(lbBanner, "/images/logo_final.png");
         lbBanner.setBounds(249, 328, 175, 33);
         contentPane.add(lbBanner);
     }

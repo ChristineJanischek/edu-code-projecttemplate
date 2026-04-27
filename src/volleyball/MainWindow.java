@@ -3,7 +3,6 @@ package volleyball;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -91,14 +90,14 @@ public class MainWindow extends JFrame {
 
         // Titel-Label mit App-Icon
         JLabel lbTitel = new JLabel("Volleyball-Team-Manager");
-        lbTitel.setIcon(new ImageIcon(MainWindow.class.getResource("/image/ic_launcher.png")));
+        UiResources.setIconIfPresent(lbTitel, "/images/ic_launcher.png");
         lbTitel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lbTitel.setBounds(31, 11, 327, 84);
         contentPane.add(lbTitel);
 
         // Logo-Banner
         JLabel lbBanner = new JLabel("");
-        lbBanner.setIcon(new ImageIcon(MainWindow.class.getResource("/image/logo_final.png")));
+        UiResources.setIconIfPresent(lbBanner, "/images/logo_final.png");
         lbBanner.setBounds(219, 290, 170, 30);
         contentPane.add(lbBanner);
 

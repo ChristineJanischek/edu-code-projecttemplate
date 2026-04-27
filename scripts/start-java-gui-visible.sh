@@ -9,6 +9,11 @@ bash "$(dirname "$0")/ensure-codespace-gui.sh"
 mkdir -p build/java
 javac -d build/java src/volleyball/*.java
 
+if [[ -d src/volleyball/images ]]; then
+	mkdir -p build/java/images
+	cp -f src/volleyball/images/* build/java/images/
+fi
+
 gui_app_start
 
 echo "[gui-visible] MainWindow gestartet"

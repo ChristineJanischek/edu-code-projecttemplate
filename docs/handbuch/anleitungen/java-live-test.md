@@ -183,6 +183,8 @@ bash scripts/stop-java-gui-visible.sh
 - Die Routine `bash scripts/ensure-codespace-gui.sh` laeuft automatisch bei jedem Codespace-Start (`postStartCommand`).
 - `bash scripts/bootstrap.sh` fuehrt die gleiche Routine ebenfalls aus.
 - Wenn Port `6080` in Codespaces als privat markiert ist, ihn im Reiter **Ports** auf Sichtbarkeit fuer den Browser stellen.
+- Nach Aenderungen an `.devcontainer/devcontainer.json` den Codespace einmal mit **Rebuild Container** neu aufbauen, damit neue Pakete/Features aktiv sind.
+- `bash scripts/stop-java-gui-visible.sh` kann jederzeit ausgefuehrt werden und beendet MainWindow sowie GUI-Bridge kontrolliert.
 
 ### App-Funktionen in der GUI
 
@@ -470,6 +472,18 @@ bash scripts/start-java-gui-visible.sh
 ```
 
 Danach Port `6080` im Reiter **Ports** oeffnen.
+
+### Fehler: Stop-Skript wurde ohne laufende GUI ausgefuehrt
+
+Ursache: Es lief bereits kein MainWindow oder keine GUI-Bridge.
+
+Loesung:
+```bash
+bash scripts/start-java-gui-visible.sh
+bash scripts/stop-java-gui-visible.sh
+```
+
+Der Befehl ist bewusst fuer den jederzeitigen Einsatz ausgelegt.
 
 ---
 

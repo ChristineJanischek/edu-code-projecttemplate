@@ -23,6 +23,11 @@ set -euo pipefail
 mkdir -p build/java
 javac -d build/java src/volleyball/*.java
 
+if [[ -d src/volleyball/images ]]; then
+  mkdir -p build/java/images
+  cp -f src/volleyball/images/* build/java/images/
+fi
+
 status=0
 timeout 8s xvfb-run -a java -cp build/java volleyball.MainWindow || status=$?
 

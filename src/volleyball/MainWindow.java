@@ -120,21 +120,21 @@ public class MainWindow extends JFrame {
         // Aktions-Buttons mit Lambda-ActionListenern
         JButton btAnzeigen = new JButton("anzeigen");
         btAnzeigen.addActionListener(e -> onAnzeigenKlick());
-        btAnzeigen.setBounds(269, 146, 89, 23);
+        btAnzeigen.setBounds(258, 146, 110, 28);
         contentPane.add(btAnzeigen);
 
         JButton btTauschen = new JButton("tauschen");
         btTauschen.addActionListener(e -> onTauschenKlick());
-        btTauschen.setBounds(269, 180, 89, 23);
+        btTauschen.setBounds(258, 182, 110, 28);
         contentPane.add(btTauschen);
 
         JButton btEinfuegen = new JButton("einfügen");
         btEinfuegen.addActionListener(e -> onEinfuegenKlick());
-        btEinfuegen.setBounds(269, 218, 89, 23);
+        btEinfuegen.setBounds(258, 218, 110, 28);
         contentPane.add(btEinfuegen);
 
         JButton btEntfernen = new JButton("entfernen");
-        btEntfernen.setBounds(269, 256, 89, 23);
+        btEntfernen.setBounds(258, 254, 110, 28);
         contentPane.add(btEntfernen);
     }
 

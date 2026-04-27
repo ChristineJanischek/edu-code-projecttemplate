@@ -25,9 +25,11 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 4. Danach automatisch `bash scripts/ensure-codespace-gui.sh` ausfuehren lassen (via `postStartCommand`).
 5. Fuer manuelle Pruefung bei Bedarf ausfuehren: `bash scripts/ensure-devcontainer-runtime.sh`, `bash scripts/ensure-vscode-extensions.sh` und `bash scripts/ensure-codespace-gui.sh`.
 6. Bei geaenderter Erweiterungsliste in `.devcontainer/devcontainer.json` die Routine direkt erneut ausfuehren.
-7. GUI-Starttest im Codespace verifizieren: `bash scripts/test-java-gui-docker.sh`.
-8. Sichtbare GUI pruefen: `bash scripts/start-java-gui-visible.sh` und noVNC-Port `6080` im Browser oeffnen.
-9. Ergebnis in der Shell verifizieren: Ausgabe endet mit `Devcontainer-Anforderungen erfuellt`, `Pflicht-Erweiterungen verfuegbar`, `GUI-Bridge aktiv` und einer erfolgreichen GUI-Startmeldung.
+7. Nach Aenderungen an `.devcontainer/devcontainer.json` den Codespace einmal mit **Rebuild Container** neu aufbauen.
+8. GUI-Starttest im Codespace verifizieren: `bash scripts/test-java-gui-docker.sh`.
+9. Sichtbare GUI pruefen: `bash scripts/start-java-gui-visible.sh` und noVNC-Port `6080` im Browser oeffnen.
+10. Stop jederzeit pruefen: `bash scripts/stop-java-gui-visible.sh`.
+11. Ergebnis in der Shell verifizieren: Ausgabe endet mit `Devcontainer-Anforderungen erfuellt`, `Pflicht-Erweiterungen verfuegbar`, `GUI-Bridge aktiv` und einer erfolgreichen GUI-Startmeldung.
 
 ## Erfolgskriterien
 - Das Runtime-Skript bestaetigt `docker-in-docker aktiv, Java-Feature auf 21 konfiguriert`.
@@ -35,6 +37,7 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 - Die Abschlussmeldung `Pflicht-Erweiterungen verfuegbar` erscheint ohne Fehler.
 - `bash scripts/test-java-gui-docker.sh` endet erfolgreich und bestaetigt den GUI-Start technisch.
 - `bash scripts/start-java-gui-visible.sh` liefert eine noVNC-URL und zeigt das Swing-Fenster im Browser.
+- `bash scripts/stop-java-gui-visible.sh` ist jederzeit ausfuehrbar und beendet MainWindow/GUI-Bridge kontrolliert.
 - Bei fehlender VS Code CLI im Codespace bricht das Skript mit klarer Fehlermeldung ab.
 
 ## Fehlerbehandlung
@@ -47,6 +50,7 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 - Fehler `Docker-Daemon nicht erreichbar`: Codespace neu starten und `bash scripts/ensure-devcontainer-runtime.sh` erneut ausfuehren.
 - Fehler `GUI-Start fehlgeschlagen`: `bash scripts/test-java-gui-docker.sh` erneut ausfuehren und die Docker-Build-/Run-Logs pruefen.
 - Fehler `noVNC nicht erreichbar`: `bash scripts/ensure-codespace-gui.sh` erneut ausfuehren und Port `6080` im Codespaces-Portpanel pruefen.
+- Hinweis nach Devcontainer-Aenderungen: Einmaliger **Rebuild Container** ist erforderlich, damit neue Features/Pakete wirksam werden.
 
 ## Ausgaben/Ergebnisse
 - Konsistente Erweiterungsbasis in jedem Codespace-Startzyklus.
@@ -61,6 +65,7 @@ Sicherstellen, dass im aktiven Codespace jederzeit alle Pflicht-Erweiterungen au
 - [java-live-test.md](../../anleitungen/java-live-test.md)
 
 ## Changelog
+- v1.3 (27.04.2026): Rebuild-Hinweis und jederzeitige Stop-Verifikation fuer GUI-Routine dokumentiert
 - v1.2 (27.04.2026): noVNC-GUI-Bridge fuer sichtbare Swing-Tests im Codespace ergaenzt
 - v1.1 (27.04.2026): GUI-Starttest im Dockerpfad und verfeinerte Verifikationsschritte ergaenzt
 - v1.0 (23.04.2026): Initiale Routine fuer persistente Erweiterungsabsicherung erstellt
